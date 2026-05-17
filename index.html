@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DevOps Exam Prep — Quick Study Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #12121a;
+    --card: #1a1a26;
+    --border: #2a2a3d;
+    --accent1: #00f5a0;
+    --accent2: #00d9f5;
+    --accent3: #f5a000;
+    --accent4: #f500a0;
+    --accent5: #a000f5;
+    --text: #e8e8f0;
+    --muted: #8888aa;
+    --font-head: 'Syne', sans-serif;
+    --font-mono: 'Space Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-mono);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Animated grid background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,245,160,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,245,160,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .hero {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 60px 20px 40px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: rgba(245,160,0,0.15);
+    border: 1px solid var(--accent3);
+    color: var(--accent3);
+    font-size: 11px;
+    letter-spacing: 3px;
+    padding: 6px 16px;
+    border-radius: 2px;
+    margin-bottom: 20px;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+  }
+
+  .hero h1 {
+    font-family: var(--font-head);
+    font-size: clamp(32px, 6vw, 72px);
+    font-weight: 800;
+    line-height: 1.05;
+    background: linear-gradient(135deg, var(--accent1), var(--accent2), var(--accent5));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 12px;
+  }
+
+  .hero p {
+    color: var(--muted);
+    font-size: 13px;
+    letter-spacing: 1px;
+  }
+
+  /* Module nav */
+  .module-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10,10,15,0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 20px;
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .module-nav::-webkit-scrollbar { display: none; }
+
+  .nav-btn {
+    flex-shrink: 0;
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    padding: 6px 14px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 1px;
+  }
+
+  .nav-btn:hover, .nav-btn.active {
+    border-color: var(--accent1);
+    color: var(--accent1);
+    background: rgba(0,245,160,0.08);
+  }
+
+  /* Main layout */
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+  }
+
+  .module-section {
+    margin-bottom: 70px;
+    opacity: 0;
+    transform: translateY(24px);
+    animation: fadeUp 0.6s ease forwards;
+  }
+
+  .module-section:nth-child(1) { animation-delay: 0.05s; }
+  .module-section:nth-child(2) { animation-delay: 0.15s; }
+  .module-section:nth-child(3) { animation-delay: 0.25s; }
+  .module-section:nth-child(4) { animation-delay: 0.35s; }
+  .module-section:nth-child(5) { animation-delay: 0.45s; }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .module-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .module-number {
+    font-family: var(--font-head);
+    font-size: 48px;
+    font-weight: 800;
+    line-height: 1;
+    min-width: 60px;
+  }
+
+  .m1 .module-number { color: var(--accent1); }
+  .m2 .module-number { color: var(--accent2); }
+  .m3 .module-number { color: var(--accent3); }
+  .m4 .module-number { color: var(--accent4); }
+  .m5 .module-number { color: var(--accent5); }
+
+  .module-title-wrap h2 {
+    font-family: var(--font-head);
+    font-size: 22px;
+    font-weight: 800;
+    margin-bottom: 4px;
+  }
+
+  .module-title-wrap p {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 2px;
+  }
+
+  /* Topics grid */
+  .topics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 16px;
+  }
+
+  .topic-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .topic-card:hover {
+    transform: translateY(-2px);
+  }
+
+  .m1 .topic-card:hover { border-color: var(--accent1); }
+  .m2 .topic-card:hover { border-color: var(--accent2); }
+  .m3 .topic-card:hover { border-color: var(--accent3); }
+  .m4 .topic-card:hover { border-color: var(--accent4); }
+  .m5 .topic-card:hover { border-color: var(--accent5); }
+
+  .topic-card-header {
+    padding: 14px 16px 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .topic-icon {
+    font-size: 18px;
+    min-width: 24px;
+  }
+
+  .topic-name {
+    font-family: var(--font-head);
+    font-size: 14px;
+    font-weight: 600;
+    flex: 1;
+  }
+
+  .chevron {
+    font-size: 12px;
+    color: var(--muted);
+    transition: transform 0.3s;
+  }
+
+  .topic-card.open .chevron { transform: rotate(180deg); }
+
+  .topic-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+  }
+
+  .topic-card.open .topic-body { max-height: 1000px; }
+
+  .topic-body ul {
+    list-style: none;
+    padding: 0 16px 16px;
+    border-top: 1px solid var(--border);
+    padding-top: 12px;
+  }
+
+  .topic-body ul li {
+    position: relative;
+    padding: 5px 0 5px 16px;
+    font-size: 12px;
+    line-height: 1.6;
+    color: #c0c0d8;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .topic-body ul li:last-child { border-bottom: none; }
+
+  .topic-body ul li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--muted);
+    font-size: 10px;
+    top: 6px;
+  }
+
+  .m1 .topic-card.open .topic-body ul li::before { color: var(--accent1); }
+  .m2 .topic-card.open .topic-body ul li::before { color: var(--accent2); }
+  .m3 .topic-card.open .topic-body ul li::before { color: var(--accent3); }
+  .m4 .topic-card.open .topic-body ul li::before { color: var(--accent4); }
+  .m5 .topic-card.open .topic-body ul li::before { color: var(--accent5); }
+
+  .expand-all-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    padding: 6px 14px;
+    border-radius: 2px;
+    cursor: pointer;
+    margin-bottom: 16px;
+    transition: all 0.2s;
+    letter-spacing: 1px;
+  }
+  .expand-all-btn:hover { color: var(--text); border-color: var(--text); }
+
+  /* Footer */
+  footer {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 24px;
+    color: var(--muted);
+    font-size: 11px;
+    border-top: 1px solid var(--border);
+    letter-spacing: 2px;
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-badge">⚡ EXAM TOMORROW — YOU GOT THIS</div>
+  <h1>DevOps<br>Study Guide</h1>
+  <p>5 MODULES · ALL TOPICS EXPLAINED · CLICK TO EXPAND</p>
+</div>
+
+<nav class="module-nav">
+  <button class="nav-btn active" onclick="scrollTo('m1')">M1 · Intro to DevOps</button>
+  <button class="nav-btn" onclick="scrollTo('m2')">M2 · Git</button>
+  <button class="nav-btn" onclick="scrollTo('m3')">M3 · Jenkins</button>
+  <button class="nav-btn" onclick="scrollTo('m4')">M4 · Maven</button>
+  <button class="nav-btn" onclick="scrollTo('m5')">M5 · Docker</button>
+</nav>
+
+<div class="container">
+
+  <!-- MODULE 1 -->
+  <section class="module-section m1" id="m1">
+    <div class="module-header">
+      <div class="module-number">01</div>
+      <div class="module-title-wrap">
+        <h2>Introduction to DevOps</h2>
+        <p>9 HOURS · FOUNDATIONS</p>
+      </div>
+    </div>
+    <button class="expand-all-btn" onclick="expandAll('m1')">Expand All Topics</button>
+    <div class="topics-grid">
+
+      <div class="topic-card">
+        <div class="topic-card-header" onclick="toggle(this)">
+          <span class="topic-icon">🤔</span>
+          <span class="topic-name">What is DevOps?</span>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="topic-body"><ul>
+          <li>DevOps is a combination of "Development" (Dev) and "Operations" (Ops) — two teams that traditionally worked separately.</li>
+          <li>It's a culture, philosophy, and set of practices that brings these two teams together to deliver software faster and more reliably.</li>
+          <li>Think of it like this: Dev team writes code, Ops team deploys & maintains it. DevOps removes the wall between them.</li>
+          <li>It emphasizes collaboration, communication, and automation throughout the software delivery pipeline.</li>
+          <li>DevOps is NOT a tool — it's a mindset and a methodology that uses tools to achieve its goals.</li>
+          <li>The ultimate goal: ship code from developer's laptop to production servers quickly, safely, and repeatedly.</li>
+          <li>Companies like Netflix, Amazon, and Google use DevOps to deploy code thousands of times per day.</li>
+        </ul></div>
+      </div>
+
+      <div class="topic-card">
+        <div class="topic-card-header" onclick="toggle(this)">
+          <span class="topic-icon">📜</span>
+          <span class="topic-name">History of DevOps</span>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="topic-body"><ul>
+          <li>Before DevOps (pre-2008): Dev and Ops teams worked in silos — developers wrote code, threw it "over the wall" to operations, and conflicts arose constantly.</li>
+          <li>2008: Patrick Debois and Andrew Shafer coined the concept during the Agile Conference, frustrated with the Dev vs Ops conflict.</li>
+          <li>2009: The first "DevOpsDays" conference was held in Ghent, Belgium — the term "DevOps" was born on Twitter (hashtag #devops).</li>
+          <li>2010s: Tools like Jenkins, Docker, Puppet, Chef, and Ansible emerged to support DevOps practices.</li>
+          <li>The "Phoenix Project" book (2013) popularized DevOps thinking through a business novel format.</li>
+          <li>Today, DevOps is a standard industry practice adopted by companies of all sizes worldwide.</li>
+        </ul></div>
+      </div>
+
+      <div class="topic-card">
+        <div class="topic-card-header" onclick="toggle(this)">
+          <span class="topic-icon">🎯</span>
+          <span class="topic-name">DevOps Main Objectives</span>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="topic-body"><ul>
+          <li>Faster Delivery: Deploy software updates in days or hours instead of months — "release early, release often."</li>
+          <li>Improved Collaboration: Break silos between Dev, QA, and Ops teams through shared responsibilities and tools.</li>
+          <li>Continuous Improvement: Always monitor, measure, and improve the software development and delivery process.</li>
+          <li>Higher Quality: Automated testing and integration catch bugs early before they reach production.</li>
+          <li>Reduced Risk: Smaller, frequent releases mean smaller changes — easier to find and fix issues.</li>
+          <li>Automation: Automate repetitive tasks (testing, building, deploying) to free humans for creative work.</li>
+          <li>Customer Satisfaction: Deliver value to customers faster and respond quickly to their feedback.</li>
+        </ul></div>
+      </div>
+
+      <div class="topic-card">
+        <div class="topic-card-header" onclick="toggle(this)">
+          <span class="topic-icon">🌊</span>
+          <span class="topic-name">Waterfall Model</span>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="topic-body"><ul>
+          <li>Waterfall is a traditional, linear software development model where each phase completes before the next begins.</li>
+          <li>Phases in order: Requirements → Design → Implementation → Testing → Deployment → Maintenance.</li>
+          <li>Like a waterfall — water flows down, you can't go back up. Once a phase is done, you rarely revisit it.</li>
+          <li>Problem: If you find a bug in testing, going back to fix design-level issues is very expensive and slow.</li>
+          <li>Releases happen very infrequently — months or even years between software versions.</li>
+          <li>DevOps replaced Waterfall thinking because it's too slow and rigid for modern software needs.</li>
+          <li>Good for projects with very fixed, unchanging requirements (e.g., defense systems, medical devices).</li>
+        </ul></div>
+      </div>
+
+      <div class="topic-card">
+        <div class="topic-card-header" onclick="toggle(this)">
+          <span class="topic-icon">🔄</span>
+          <span class="topic-name">Agile Model</span>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="topic-body"><ul>
+          <li>Agile is an iterative software development methodology — work is done in small cycles called "Sprints" (usually 2 weeks).</li>
+          <li>Each sprint produces a working piece of software that can be shown to customers for feedback.</li>
+          <li>Agile is flexible — requirements can change between sprints based on customer feedback or market conditions.</li>
+          <li>Core Agile values: Individuals over processes, working software over docs, customer collaboration over contracts, responding to change over following a plan.</li>
+          <li>DevOps extends Agile: Agile focuses on development speed; DevOps adds automation of deployment and operations.</li>
+          <li>Popular Agile frameworks: Scrum (sprints, stand-ups, backlogs) and Kanban (visual board, continuous flow).</li>
+          <li>Agile + DevOps together = code written fast AND deployed fast with quality.</li>
+        </ul></div>
+      </div>
+
+      <div class="topic-card">
+        <div class="topic-card-header" onclick="toggle(this)">
+          <span class="topic-icon">🔁</span>
+          <span class="topic-name">Continuous Integration & Deployment (CI/CD)</span>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="topic-body"><ul>
+          <li>Continuous Integration (CI): Developers merge their code changes into a shared repository multiple times a day. Each merge triggers automated tests.</li>
+          <li>CI prevents "integration hell" — when developers work separately for too long and merging becomes a nightmare.</li>
+          <li>Continuous Delivery (CD): After CI passes, code is automatically prepared and ready to be deployed to production at any time.</li>
+          <li>Continuous Deployment: Takes it further — code automatically deploys to production after passing all tests, no human approval needed.</li>
+          <li>Jenkins is the most popular CI/CD tool — it automates the build, test, and deploy pipeline.</li>
+          <li>CI/CD pipeline stages: Code → Build → Test → Stage → Deploy. Each stage is automated.</li>
+          <li>Benefits: Faster feedback on bugs, less risky releases, and always having a deployable version of code.</li>
+        </ul></div>
+      </div>
+
+      <div class="topic-card">
+        <div class="topic-card-header" onclick="toggle(this)">
+          <span class="topic-icon">📦</span>
+          <span class="topic-name">Containers & Virtual Development (Docker, Vagrant)</span>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="topic-body"><ul>
+          <li>The classic developer problem: "It works on my machine!" — Containers solve this by packaging app + dependencies together.</li>
+          <li>Docker creates lightweight containers — isolated environments that run consistently on any machine.</li>
+          <li>Containers share the host OS kernel (unlike VMs which have their own full OS), making them faster and lighter.</li>
+          <li>Vagrant is a tool for managing Virtual Machines (VMs) — it automates the setup of complete VM environments using a "Vagrantfile" config.</li>
+          <li>Difference: Docker = containers (lightweight, seconds to start). Vagrant = full VMs (heavier, minutes to start).</li>
+          <li>Both help create reproducible development environments — every team member works in identical conditions.</li>
+          <li>Docker is the dominant technology today; Vagrant is older and mainly used for full VM-based workflows.</li>
+        </ul></div>
+      </div>
+
+      <div class="topic-card">
+        <div class="topic-card-header" onclick="toggle(this)">
+          <span class="topic-icon">⚙️</span>
+          <span class="topic-name">Configuration Management (Ansible, Puppet, Chef)</span>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="topic-body"><ul>
+          <li>Configuration Management (CM) automates the setup and maintenance of servers — no more manually SSHing into 100 servers!</li>
+          <li>Ansible: Simple, agentless (no software needed on remote servers), uses YAML files called "Playbooks." Easiest to learn. Push-based.</li>
+          <li>Puppet: Uses its own language (Puppet DSL), requires an agent installed on each server, pull-based (servers pull config from master).</li>
+          <li>Chef: Uses Ruby, very powerful and flexible, requires agents. Uses "Recipes" and "Cookbooks" as config files. Steeper learning curve.</li>
+          <li>All three ensure servers are always in the desired state — if someone manually changes a config, CM tools fix it automatically.</li>
+          <li>Idempotency: Running CM tools multiple times gives the same result — no unintended side effects.</li>
+          <li>CM tools are essential for infrastructure at scale — managing hundreds or thousands of servers consistently.</li>
+        </ul></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- MODULE 2 -->
+  <section class="module-section m2" id="m2">
+    <div class="module-header">
+      <div class="module-number">02</div>
+      <div class="module-title-wrap">
+        <h2>Version Control — GIT</h2>
+        <p>9 HOURS · SOURCE CONTROL</p>
+      </div>
+    </div>
+    <button class="expand-all-btn" onclick="expandAll('m2')">Expand All Topics</button>
+    <div class="topics-grid">
+
+      <div class="topic-card">
+        <div class="topic-card-header" onclick="toggle(this)">
+          <span class="topic-icon">✨</span>
+          <span class="topic-name">GIT Features</span>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="topic-body"><ul>
+          <li>Git is a distributed version control system — every developer has a full copy of the entire repository history on their machine.</li>
+          <li>Tracks every change to every file — who changed what, when, and why (via commit messages).</li>
+          <li>Branching is extremely fast and lightweight in Git — create a branch in milliseconds.</li>
+          <li>Works offline — you can commit, branch, and view history without internet. Only push/pull needs a connection.</li>
+          <li>Distributed: No single point of failure. If a central server crashes, any developer's copy can restore it.</li>
+          <li>Data integrity: Git uses SHA-1 hashes to identify every commit — impossible to silently corrupt history.</li>
+          <li>Free and open-source, created by Linus Torvalds (creator of Linux) in 2005 for managing the Linux kernel source code.</li>
+        </ul></div>
+      </div>
+
+      <div class="topic-card">
+        <div class="topic-card-header" onclick="toggle(this)">
+          <span class="topic-icon">🌲</span>
+          <span class="topic-name">3-Tree Architecture</span>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="topic-body"><ul>
+          <li>Git has 3 "trees" (areas) that files move through. Understanding this is the KEY to understanding Git.</li>
+          <li>Tree 1 — Working Directory: Where you actually edit files. This is your normal filesystem.</li>
+          <li>Tree 2 — Staging Area (Index): A preparation zone. You choose which changes to include in the next commit using `git add`.</li>
+          <li>Tree 3 — Repository (.git folder): The permanent history. Once committed with `git commit`, changes are saved forever.</li>
+          <li>Workflow: Edit files (Working Dir) → Stage changes (git add → Staging Area) → Commit (git commit → Repository).</li>
+          <li>The Staging Area lets you craft precise commits — e.g., you changed 5 files but only want to commit 3 of them.</li>
+          <li>Think of it like: Draft (Working) → Review (Staging) → Publish (Repository).</li>
+        </ul></div>
+      </div>
+
+      <div class="topic-card">
+        <div class="topic-card-header" onclick="toggle(this)">
+          <span class="topic-icon">📤</span>
+          <span class="topic-name">GIT Clone / Commit / Push</span>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="topic-body"><ul>
+          <li>git clone [URL]: Downloads a complete copy of a remote repository to your local machine, including all history and branches.</li>
+          <li>git add [file]: Moves changes from Working Directory to the Staging Area. Use `git add .` to stage all changes.</li>
+          <li>git commit -m "message": Saves staged changes permanently into the local repository with a descriptive message.</li>
+          <li>git push origin main: Uploads your local commits to the remote repository (e.g., GitHub) so others can see them.</li>
+          <li>git status: Shows which files are modified, staged, or untracked — your most-used Git command.</li>
+          <li>git log: Shows the history of all commits — who committed what and when.</li>
+          <li>The typical daily workflow: pull latest → make changes → add → commit → push. Repeat!</li>
+        </ul></div>
+      </div>
+
+      <div class="topic-card">
+        <div class="topic-card-header" onclick="toggle(this)">
+          <span class="topic-icon">🔀</span>
+          <span class="topic-name">GIT Rebase & Merge</span>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="topic-body"><ul>
+          <li>Both Merge and Rebase integrate changes from one branch into another, but they do it differently.</li>
+          <li>git merge: Combines two branches by creating a new "merge commit." Preserves the exact history of both branches.</li>
+          <li>git rebase: Moves your branch's commits onto the tip of another branch — creates a linear, cleaner history.</li>
+          <li>Analogy: Merge = "We worked separately, then merged our work." Rebase = "I pretend I started my work after yours."</li>
+          <li>Merge is safer for public/shared branches. Rebase is great for cleaning up local commits before merging.</li>
+          <li>Golden rule: Never rebase commits that have already been pushed to a shared repository — it rewrites history and causes chaos.</li>
+          <li>Merge conflicts occur when both branches changed the same line. Git marks the conflict and you resolve it manually.</li>
+        </ul></div>
+      </div>
+
+      <div class="topic-card">
+        <div class="topic-card-header" onclick="toggle(this)">
+          <span class="topic-icon">📦</span>
+          <span class="topic-name">GIT Stash</span>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="topic-body"><ul>
+          <li>Stash is like a temporary drawer — it saves your unfinished work so you can switch to another task urgently.</li>
+          <li>git stash: Takes all your uncommitted changes and puts them aside, leaving your working directory clean.</li>
+          <li>git stash pop: Brings your stashed changes back and removes them from the stash.</li>
+          <li>git stash apply: Brings changes back but keeps them in the stash too (useful for applying to multiple branches).</li>
+          <li>git stash list: Shows all your saved stashes — you can have multiple stashes.</li>
+          <li>Scenario: You're halfway through a feature when your boss says "fix this bug NOW!" Stash your work, fix the bug, pop your stash, continue.</li>
+          <li>Stash does NOT save untracked (new) files by default. Use `git stash -u` to include untracked files.</li>
+        </ul></div>
+      </div>
+
+      <div class="topic-card">
+        <div class="topic-card-header" onclick="toggle(this)">
+          <span class="topic-icon">⏪</span>
+          <span class="topic-name">GIT Reset, Checkout</span>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="topic-body"><ul>
+          <li>git checkout [branch]: Switches to a different branch, updating your working directory to match that branch.</li>
+          <li>git checkout [file]: Discards all changes to a file in your working directory — restores it to last commit state.</li>
+          <li>git reset --soft HEAD~1: Undoes the last commit but keeps changes staged. Commit is gone, code is saved.</li>
+          <li>git reset --mixed HEAD~1 (default): Undoes the last commit and unstages changes. Code stays in working directory.</li>
+          <li>git reset --hard HEAD~1: DANGER — Completely destroys the last commit AND all changes. Cannot be undone easily.</li>
+          <li>HEAD is a pointer to your current position in Git history. HEAD~1 means "one commit before current."</li>
+          <li>Modern Git uses `git switch` and `git restore` instead of the overloaded `git checkout` command.</li>
+        </ul></div>
+      </div>
+
+      <div class="topic-card">
+        <div class="topic-card-header" onclick="toggle(this)">
+          <span class="topic-icon">⬇️</span>
+          <span class="topic-name">GIT Clone, Fetch, Pull</span>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="topic-body"><ul>
+          <li>git clone: One-time operation to copy an entire remote repository to your machine for the first time.</li>
+          <li>git fetch: Downloads new data from the remote repository but does NOT merge it into your local branches. Safe operation.</li>
+          <li>git pull: Downloads AND immediately merges remote changes into your current branch. It's git fetch + git merge combined.</li>
+          <li>When to use fetch: You want to see what changed remotely before deciding to merge. Good for reviewing changes first.</li>
+          <li>When to use pull: You're confident and want to update your branch with the latest remote changes immediately.</li>
+          <li>git pull --rebase: Fetches and rebases instead of merging — keeps a cleaner, linear history.</li>
+          <li>Always pull before you push to avoid conflicts — get the latest code before adding yours.</li>
+        </ul></div>
+      </div>
+
+      <div class="topic-card">
+        <div class="topic-card-header" onclick="toggle(this)">
+          <span class="topic-icon">🐙</span>
+          <span class="topic-name">GitHub Projects & Management</span>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="topic-body"><ul>
+          <li>GitHub is a cloud hosting service for Git repositories — it adds a web UI, collaboration features, and project management on top of Git.</li>
+          <li>Pull Requests (PRs): A GitHub feature where you propose merging your branch. Team members review, comment, and approve before merging.</li>
+          <li>Issues: GitHub's built-in bug tracker and task manager — teams create issues for bugs, features, and tasks.</li>
+          <li>GitHub Projects: A Kanban-style board built into GitHub to track issues and PRs through stages (To Do → In Progress → Done).</li>
+          <li>Forking: Copying someone else's public repository to your own GitHub account to experiment or contribute.</li>
+          <li>GitHub Actions: Built-in CI/CD — you can define workflows (YAML files) that run automatically on events like push or PR.</li>
+          <li>Organizations and Teams allow managing multiple repositories and controlling who can access and modify what.</li>
+        </ul></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- MODULE 3 -->
+  <section class="module-section m3" id="m3">
+    <div class="module-header">
+      <div class="module-number">03</div>
+      <div class="module-title-wrap">
+        <h2>Continuous Integration — Jenkins</h2>
+        <p>9 HOURS · CI/CD AUTOMATION</p>
+      </div>
+    </div>
+    <button class="expand-all-btn" onclick="expandAll('m3')">Expand All Topics</button>
+    <div class="topics-grid">
+
+      <div class="topic-card">
+        <div class="topic-card-header" onclick="toggle(this)">
+          <span class="topic-icon">🤖</span>
+          <span class="topic-name">Introduction to Jenkins</span>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="topic-body"><ul>
+          <li>Jenkins is a free, open-source automation server that helps automate building, testing, and deploying software.</li>
+          <li>Written in Java, Jenkins runs as a web server — you access it through a browser on port 8080 by default.</li>
+          <li>Jenkins is the most popular CI/CD tool in the world — used by millions of developers and companies.</li>
+          <li>It acts like a robot that watches your Git repository. When you push code, Jenkins automatically builds and tests it.</li>
+          <li>Jenkins has a massive plugin ecosystem (1800+ plugins) that lets it integrate with almost any tool.</li>
+          <li>Originally forked from "Hudson" in 2011 when Oracle acquired Sun Microsystems and the community moved to Jenkins.</li>
+          <li>Jenkins can be installed on any OS (Linux, Windows, Mac) or run as a Docker container.</li>
+        </ul></div>
+      </div>
+
+      <div class="topic-card">
+        <div class="topic-card-header" onclick="toggle(this)">
+          <span class="topic-icon">🔧</span>
+          <span class="topic-name">Configure & Manage Jenkins</span>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="topic-body"><ul>
+          <li>Jenkins is configured through its web UI at http://localhost:8080 — first-time setup uses an auto-generated admin password.</li>
+          <li>Global Configuration: Set up JDK, Maven, Git, and other tool paths that Jenkins will use for builds.</li>
+          <li>Jenkins home directory stores all jobs, build history, logs, and plugin data — back it up regularly!</li>
+          <li>Manage Jenkins → Configure System: Set global settings like email notifications, environment variables, and node configurations.</li>
+          <li>Jenkins uses a "Master" (now called Controller) to manage everything and distributes work to "Agent" (Slave) nodes.</li>
+          <li>System Log in Jenkins: View Jenkins internal logs to debug issues with the server itself.</li>
+          <li>Jenkins can be managed via CLI (jenkins-cli.jar) or REST API for scripting and automation.</li>
+        </ul></div>
+      </div>
+
+      <div class="topic-card">
+        <div class="topic-card-header" onclick="toggle(this)">
+          <span class="topic-icon">⏰</span>
+          <span class="topic-name">Scheduling Build Jobs (Poll SCM & Build Periodically)</span>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="topic-body"><ul>
+          <li>Jenkins can trigger builds automatically in multiple ways — you don't have to click "Build" manually every time.</li>
+          <li>Poll SCM: Jenkins periodically checks your Git repository for new commits. If new code is found, it triggers a build. Uses cron syntax.</li>
+          <li>Build Periodically: Triggers a build at scheduled times regardless of whether code changed — like a cron job. e.g., `0 2 * * *` = build at 2 AM daily.</li>
+          <li>Cron syntax: `* * * * *` = (minute, hour, day of month, month, day of week). H symbol = Jenkins picks a smart time to spread load.</li>
+          <li>Webhook Trigger (preferred): Git services like GitHub send a notification to Jenkins when code is pushed — instant triggering, no polling delay.</li>
+          <li>Poll SCM is less efficient because Jenkins wastes resources checking for changes even if nothing happened.</li>
+          <li>Example Poll SCM: `H/5 * * * *` = check for changes every 5 minutes.</li>
+        </ul></div>
+      </div>
+
+      <div class="topic-card">
+        <div class="topic-card-header" onclick="toggle(this)">
+          <span class="topic-icon">📋</span>
+          <span class="topic-name">Different Types of Jenkins Jobs</span>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="topic-body"><ul>
+          <li>Freestyle Project: The simplest Jenkins job — configure build steps through the UI, point to a repo, and add shell/batch commands. Best for beginners.</li>
+          <li>Maven Project: Special job type that understands Maven's build lifecycle — automatically parses pom.xml and runs Maven goals.</li>
+          <li>Pipeline: Modern approach — define your entire build, test, and deploy pipeline as code in a "Jenkinsfile." Most powerful and recommended.</li>
+          <li>Multibranch Pipeline: Automatically creates pipeline jobs for each branch in your repository. Great for feature branch workflows.</li>
+          <li>GitHub Organization: Scans an entire GitHub organization and creates multibranch pipelines for all repos automatically.</li>
+          <li>Folder: Not a job type but an organizational tool — groups related jobs together in the Jenkins UI.</li>
+          <li>Matrix Project (Multi-Configuration): Runs the same build with different combinations — e.g., test on Python 3.8 AND 3.9 AND 3.10 simultaneously.</li>
+        </ul></div>
+      </div>
+
+      <div class="topic-card">
+        <div class="topic-card-header" onclick="toggle(this)">
+          <span class="topic-icon">🔗</span>
+          <span class="topic-name">Jenkins Build Pipeline (Parent/Child & Sequential)</span>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="topic-body"><ul>
+          <li>A Build Pipeline chains multiple Jenkins jobs together — output of one job becomes input of the next.</li>
+          <li>Parent-Child Builds: A parent (upstream) job triggers child (downstream) jobs. E.g., Build job triggers Test job which triggers Deploy job.</li>
+          <li>Sequential Builds: Jobs run one after another in sequence — Stage 1 must pass before Stage 2 starts.</li>
+          <li>Parallel Builds: Multiple jobs run simultaneously — e.g., run unit tests AND integration tests at the same time to save time.</li>
+          <li>Jenkins Pipeline plugin provides the `Build Pipeline View` — a visual dashboard showing job chains and their statuses.</li>
+          <li>Jenkinsfile defines the pipeline as code: `pipeline { stages { stage('Build') { ... } stage('Test') { ... } stage('Deploy') { ... } } }`</li>
+          <li>If any stage fails, the pipeline stops and marks the build as FAILED — preventing bad code from reaching production.</li>
+        </ul></div>
+      </div>
+
+      <div class="topic-card">
+        <div class="topic-card-header" onclick="toggle(this)">
+          <span class="topic-icon">🖥️</span>
+          <span class="topic-name">Jenkins Master & Slave Node Configuration</span>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="topic-body"><ul>
+          <li>Jenkins Master (Controller): The main Jenkins server — manages jobs, schedules builds, distributes work, and stores results. Should NOT run builds itself in large setups.</li>
+          <li>Jenkins Slave (Agent): Remote machines that actually execute the build jobs assigned by the master.</li>
+          <li>Why use agents? Distribute workload, run builds on different OS (e.g., build iOS app on Mac agent), run in parallel, scale horizontally.</li>
+          <li>Connection methods: SSH (Linux agents), JNLP/Java Web Start (Windows agents), or Jenkins Docker agents.</li>
+          <li>Labels: Tag agents with labels (e.g., "linux", "docker", "java11") and assign jobs to specific label types.</li>
+          <li>In Jenkinsfile: `agent { label 'linux' }` — run this pipeline only on agents labeled "linux."</li>
+          <li>Cloud agents (AWS, GCP, Kubernetes): Spin up agents on-demand, run the build, then terminate — cost-efficient for variable workloads.</li>
+        </ul></div>
+      </div>
+
+      <div class="topic-card">
+        <div class="topic-card-header" onclick="toggle(this)">
+          <span class="topic-icon">🔒</span>
+          <span class="topic-name">Securing Jenkins</span>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="topic-body"><ul>
+          <li>By default, Jenkins may allow anyone to do anything — you MUST secure it before exposing it to the internet.</li>
+          <li>Authentication: Who can log in? Options include Jenkins own user database, LDAP (company directory), GitHub OAuth, or SSO.</li>
+          <li>Authorization: What can logged-in users do? Matrix-based security lets you grant specific permissions (read, build, configure, admin) per user/group.</li>
+          <li>Role-Based Access Control (RBAC): Use the "Role-based Authorization Strategy" plugin to define roles (developer, QA, admin) and assign them to users.</li>
+          <li>Confidentiality: Use HTTPS (SSL/TLS) to encrypt traffic to Jenkins — never run Jenkins over plain HTTP in production.</li>
+          <li>Credentials Store: Jenkins has a secure vault for storing passwords, API keys, SSH keys, and certificates — never hardcode secrets in Jenkinsfiles!</li>
+          <li>Creating Users: Manage Jenkins → Manage Users → Create User. Always disable the anonymous read access option.</li>
+        </ul></div>
+      </div>
+
+      <div class="topic-card">
+        <div class="topic-card-header" onclick="toggle(this)">
+          <span class="topic-icon">🧩</span>
+          <span class="topic-name">Jenkins Plugins</span>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="topic-body"><ul>
+          <li>Plugins extend Jenkins' capabilities — Jenkins itself is minimal; plugins add almost all functionality.</li>
+          <li>Installing Plugins: Manage Jenkins → Manage Plugins → Available tab → Search → Install without restart (or with restart for some).</li>
+          <li>SCM Plugin: Integrates Jenkins with version control systems like Git, SVN. The "Git Plugin" is essential for almost every Jenkins setup.</li>
+          <li>Build Plugins: Maven Integration Plugin, Gradle Plugin, Ant Plugin — let Jenkins understand and execute various build tools.</li>
+          <li>Test Plugins: JUnit Plugin displays test results in a beautiful UI. Coverage plugins show code coverage reports.</li>
+          <li>Pipeline Plugin (Blue Ocean): Provides the modern Pipeline Job type and a beautiful visual pipeline editor.</li>
+          <li>Popular essential plugins: Git, Pipeline, Blue Ocean, Credentials, Email Extension, Slack Notification, Docker, Kubernetes.</li>
+        </ul></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- MODULE 4 -->
+  <section class="module-section m4" id="m4">
+    <div class="module-header">
+      <div class="module-number">04</div>
+      <div class="module-title-wrap">
+        <h2>Build Tool — Maven</h2>
+        <p>9 HOURS · BUILD AUTOMATION</p>
+      </div>
+    </div>
+    <button class="expand-all-btn" onclick="expandAll('m4')">Expand All Topics</button>
+    <div class="topics-grid">
+
+      <div class="topic-card">
+        <div class="topic-card-header" onclick="toggle(this)">
+          <span class="topic-icon">🏗️</span>
+          <span class="topic-name">Maven Introduction & Installation</span>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="topic-body"><ul>
+          <li>Maven is a build automation tool primarily used for Java projects — it handles compilation, testing, packaging, and dependency management.</li>
+          <li>Think of Maven as a "project manager" — it knows how to build your project from source code to a final deployable artifact (JAR/WAR).</li>
+          <li>Installation: Download Apache Maven, extract it, set MAVEN_HOME environment variable, add bin/ to PATH. Verify with `mvn --version`.</li>
+          <li>Maven uses a standard project structure — `src/main/java` for code, `src/test/java` for tests, `target/` for build output.</li>
+          <li>Convention over Configuration: Maven follows strict conventions so you write less configuration. If you follow its structure, it "just works."</li>
+          <li>Maven requires Java (JDK) to be installed — it's a Java tool that builds Java projects.</li>
+          <li>Alternative to Maven: Gradle (newer, more flexible), Ant (older, manual). Maven is most widely used in enterprise Java.</li>
+        </ul></div>
+      </div>
+
+      <div class="topic-card">
+        <div class="topic-card-header" onclick="toggle(this)">
+          <span class="topic-icon">📄</span>
+          <span class="topic-name">Maven POM (pom.xml)</span>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="topic-body"><ul>
+          <li>POM = Project Object Model — the pom.xml file is the heart of every Maven project. It defines everything about the project.</li>
+          <li>Every pom.xml must have: groupId (organization), artifactId (project name), and version (e.g., 1.0.0). This trio uniquely identifies your project in the Maven world.</li>
+          <li>groupId: Your organization's identifier, usually reverse domain name — e.g., `com.google`, `org.apache`, `com.mycompany`.</li>
+          <li>artifactId: The name of your specific project/module — e.g., `my-web-app`, `user-service`.</li>
+          <li>version: Identifies the version — e.g., `1.0.0`, `2.3.1`, or `1.0-SNAPSHOT` for work in progress.</li>
+          <li>Dependencies are declared in pom.xml — Maven automatically downloads them from the internet (Maven Central repository).</li>
+          <li>Super POM: Every pom.xml inherits from Maven's built-in "Super POM" which provides default configurations — you only override what you need.</li>
+        </ul></div>
+      </div>
+
+      <div class="topic-card">
+        <div class="topic-card-header" onclick="toggle(this)">
+          <span class="topic-icon">🔄</span>
+          <span class="topic-name">Maven Build Lifecycle</span>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="topic-body"><ul>
+          <li>Maven has a fixed build lifecycle — a sequence of phases that execute in order. You can't skip phases (earlier phases always run first).</li>
+          <li>Key phases in order: validate → compile → test → package → verify → install → deploy.</li>
+          <li>validate: Checks pom.xml is correct and all necessary info is available.</li>
+          <li>compile: Compiles Java source code in src/main/java into bytecode in target/classes.</li>
+          <li>test: Runs unit tests in src/test/java using a test framework like JUnit. Build fails if tests fail.</li>
+          <li>package: Packages compiled code into a distributable format — JAR file for libraries, WAR for web apps.</li>
+          <li>install: Copies the packaged artifact to your local .m2 repository so other local Maven projects can use it as a dependency.</li>
+          <li>deploy: Uploads the artifact to a remote repository (like Nexus or Artifactory) for team sharing. Used in CI/CD.</li>
+        </ul></div>
+      </div>
+
+      <div class="topic-card">
+        <div class="topic-card-header" onclick="toggle(this)">
+          <span class="topic-icon">📦</span>
+          <span class="topic-name">Maven Repositories (.m2, Global, Central)</span>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="topic-body"><ul>
+          <li>Maven has a 3-tier repository system for finding and caching dependencies.</li>
+          <li>Local Repository (.m2): A folder on your machine (at ~/.m2/repository). First place Maven checks for dependencies. Acts as a cache.</li>
+          <li>Remote/Central Repository: Maven Central (https://repo.maven.apache.org) — the default public repository with millions of open-source Java libraries.</li>
+          <li>Corporate/Private Repository: Tools like Nexus Repository or JFrog Artifactory — companies host their own artifacts here for internal sharing.</li>
+          <li>Lookup order: Local (.m2) → Private/Corporate Repo → Maven Central. If found locally, no download needed (faster builds).</li>
+          <li>settings.xml in ~/.m2/ lets you configure proxy, mirrors, and credentials for accessing private repositories.</li>
+          <li>`mvn dependency:resolve` downloads all declared dependencies to your local .m2 cache.</li>
+        </ul></div>
+      </div>
+
+      <div class="topic-card">
+        <div class="topic-card-header" onclick="toggle(this)">
+          <span class="topic-icon">🔗</span>
+          <span class="topic-name">Maven Dependencies & Snapshot</span>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="topic-body"><ul>
+          <li>Dependencies in pom.xml declare external libraries your project needs — Maven downloads them automatically. No more manual JAR downloads!</li>
+          <li>Each dependency is identified by groupId + artifactId + version — same coordinates used for your own project.</li>
+          <li>Dependency Scope: `compile` (default, always available), `test` (only for testing, e.g. JUnit), `provided` (available at runtime but not packaged, e.g. Servlet API), `runtime` (needed to run but not compile).</li>
+          <li>Transitive Dependencies: If Library A depends on Library B, Maven automatically downloads B too — you only declare direct dependencies.</li>
+          <li>SNAPSHOT: A version ending in `-SNAPSHOT` (e.g., `1.0-SNAPSHOT`) means it's in active development and can change. Maven re-downloads it periodically.</li>
+          <li>RELEASE: A stable, finalized version. Once released, it NEVER changes. `1.0.0` is a release version.</li>
+          <li>Dependency conflicts: When two libraries need different versions of the same dependency, Maven uses "nearest wins" or "first declaration" rules.</li>
+        </ul></div>
+      </div>
+
+      <div class="topic-card">
+        <div class="topic-card-header" onclick="toggle(this)">
+          <span class="topic-icon">🔌</span>
+          <span class="topic-name">Maven Plugins</span>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="topic-body"><ul>
+          <li>Maven itself is just a framework — all actual build actions (compile, test, package) are performed by Plugins.</li>
+          <li>Plugins are bound to lifecycle phases — e.g., the Compiler Plugin runs during the `compile` phase automatically.</li>
+          <li>maven-compiler-plugin: Compiles Java code. You configure Java version here (e.g., source/target = 11 or 17).</li>
+          <li>maven-surefire-plugin: Runs unit tests during the `test` phase. Works with JUnit and TestNG.</li>
+          <li>maven-jar-plugin: Creates a JAR file during the `package` phase.</li>
+          <li>maven-war-plugin: Creates a WAR file for web applications during the `package` phase.</li>
+          <li>Plugins have Goals — specific tasks the plugin can perform. e.g., `mvn compiler:compile` runs only the compile goal of the compiler plugin.</li>
+        </ul></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- MODULE 5 -->
+  <section class="module-section m5" id="m5">
+    <div class="module-header">
+      <div class="module-number">05</div>
+      <div class="module-title-wrap">
+        <h2>Docker</h2>
+        <p>9 HOURS · CONTAINERIZATION</p>
+      </div>
+    </div>
+    <button class="expand-all-btn" onclick="expandAll('m5')">Expand All Topics</button>
+    <div class="topics-grid">
+
+      <div class="topic-card">
+        <div class="topic-card-header" onclick="toggle(this)">
+          <span class="topic-icon">🐋</span>
+          <span class="topic-name">What is Docker & Docker Images?</span>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="topic-body"><ul>
+          <li>Docker is a platform for building, shipping, and running applications in isolated environments called containers.</li>
+          <li>Docker Image: A read-only template with everything needed to run an app — code, runtime, libraries, environment variables, config files.</li>
+          <li>Images are built in layers — each instruction in a Dockerfile adds a layer. Layers are cached and reused for faster builds.</li>
+          <li>Think of an Image like a class in OOP — it's a blueprint. A Container is like an object — a running instance of the blueprint.</li>
+          <li>Images are immutable — you never modify a running container to change the image. Instead you build a new image.</li>
+          <li>Getting Images: docker pull [image-name] downloads from Docker Hub. e.g., `docker pull nginx` downloads the Nginx web server image.</li>
+          <li>docker images: Lists all images on your machine. docker rmi [image]: Removes an image. docker inspect [image]: Shows detailed image metadata.</li>
+        </ul></div>
+      </div>
+
+      <div class="topic-card">
+        <div class="topic-card-header" onclick="toggle(this)">
+          <span class="topic-icon">⚙️</span>
+          <span class="topic-name">Docker Installation & Engine</span>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="topic-body"><ul>
+          <li>Docker Desktop: Easy installer for Windows and Mac that includes Docker Engine, CLI, and a GUI dashboard.</li>
+          <li>Linux: Install Docker Engine directly via package manager. `sudo apt install docker.io` on Ubuntu, then `sudo systemctl start docker`.</li>
+          <li>Docker Engine is the core runtime — it's a client-server application with a daemon (dockerd), a REST API, and the CLI client (docker).</li>
+          <li>Docker Daemon (dockerd): The background service that manages all Docker objects (images, containers, networks, volumes). Runs as root.</li>
+          <li>Docker CLI: The command-line tool you use to interact with Docker. Commands like `docker run`, `docker build`, `docker ps`.</li>
+          <li>Verify installation: `docker --version` shows version. `docker run hello-world` runs a test container — confirms everything works.</li>
+          <li>Docker uses Linux kernel features (namespaces, cgroups) for isolation — on Windows/Mac, Docker Desktop runs a lightweight Linux VM.</li>
+        </ul></div>
+      </div>
+
+      <div class="topic-card">
+        <div class="topic-card-header" onclick="toggle(this)">
+          <span class="topic-icon">📦</span>
+          <span class="topic-name">Working with Docker Containers</span>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="topic-body"><ul>
+          <li>Container: A running instance of a Docker image — isolated process with its own filesystem, network, and process space.</li>
+          <li>docker run [image]: Creates AND starts a container from an image. e.g., `docker run -d -p 80:80 nginx` runs Nginx in background on port 80.</li>
+          <li>docker ps: Lists running containers. docker ps -a: Lists ALL containers including stopped ones.</li>
+          <li>docker stop [container]: Gracefully stops a running container (sends SIGTERM). docker kill [container]: Forcefully kills it (SIGKILL).</li>
+          <li>docker rm [container]: Removes a stopped container. docker rm -f: Force removes even running containers.</li>
+          <li>docker exec -it [container] bash: Opens an interactive shell inside a running container — great for debugging.</li>
+          <li>-d flag: Detached mode, runs container in background. -p 8080:80: Maps host port 8080 to container port 80. --name myapp: Names the container.</li>
+        </ul></div>
+      </div>
+
+      <div class="topic-card">
+        <div class="topic-card-header" onclick="toggle(this)">
+          <span class="topic-icon">📝</span>
+          <span class="topic-name">Dockerfile & Commands</span>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="topic-body"><ul>
+          <li>Dockerfile: A text file with instructions to build a custom Docker image automatically. `docker build -t myimage .` builds from Dockerfile.</li>
+          <li>FROM: The first instruction — specifies the base image. e.g., `FROM openjdk:17` starts with a Java 17 image.</li>
+          <li>RUN: Executes a command during image build. e.g., `RUN apt-get update && apt-get install -y curl` installs curl.</li>
+          <li>COPY/ADD: Copies files from your machine into the image. `COPY target/app.jar /app/app.jar`</li>
+          <li>ENV: Sets environment variables inside the container. `ENV JAVA_OPTS=-Xmx512m`</li>
+          <li>EXPOSE: Documents which port the container listens on. e.g., `EXPOSE 8080`. Doesn't actually open the port — just documentation.</li>
+          <li>CMD/ENTRYPOINT: Specifies the command to run when a container starts. `CMD ["java", "-jar", "/app/app.jar"]`</li>
+        </ul></div>
+      </div>
+
+      <div class="topic-card">
+        <div class="topic-card-header" onclick="toggle(this)">
+          <span class="topic-icon">🎼</span>
+          <span class="topic-name">Docker Compose</span>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="topic-body"><ul>
+          <li>Docker Compose lets you define and run multi-container applications using a single YAML file (docker-compose.yml).</li>
+          <li>Instead of running 3 separate `docker run` commands for your app, database, and cache — define all 3 in one YAML and start everything with `docker-compose up`.</li>
+          <li>docker-compose up: Starts all services defined in docker-compose.yml. docker-compose down: Stops and removes all containers.</li>
+          <li>Services: Each container in Compose is a "service" — you define image, ports, environment variables, volumes, and dependencies.</li>
+          <li>depends_on: Ensures one service starts before another. e.g., your app service `depends_on: db` — database starts first.</li>
+          <li>Networks: Compose automatically creates a network so all services can communicate using service names as hostnames.</li>
+          <li>docker-compose logs: View logs from all services. docker-compose ps: Shows status of all services. `docker-compose up --build`: Forces rebuild of images.</li>
+        </ul></div>
+      </div>
+
+      <div class="topic-card">
+        <div class="topic-card-header" onclick="toggle(this)">
+          <span class="topic-icon">🌐</span>
+          <span class="topic-name">Docker Hub & Docker Trusted Registry</span>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="topic-body"><ul>
+          <li>Docker Hub (hub.docker.com): The default public registry — like GitHub but for Docker images. Millions of public images are available here.</li>
+          <li>Official Images: Images maintained by Docker or the software vendor (e.g., `nginx`, `mysql`, `node`, `python`) — safe to use, regularly updated.</li>
+          <li>docker push [image]: Uploads your local image to Docker Hub so others can download and use it.</li>
+          <li>docker pull [image]: Downloads an image from Docker Hub to your local machine.</li>
+          <li>Image naming: `username/image-name:tag` e.g., `mycompany/webapp:v1.0`. Default tag is `latest` if not specified.</li>
+          <li>Docker Trusted Registry (DTR): Docker's enterprise-grade private registry — host it within your company firewall for security and control over images.</li>
+          <li>DTR provides role-based access control, image signing (security), vulnerability scanning, and audit logging — features Docker Hub doesn't offer for free.</li>
+        </ul></div>
+      </div>
+
+      <div class="topic-card">
+        <div class="topic-card-header" onclick="toggle(this)">
+          <span class="topic-icon">🐝</span>
+          <span class="topic-name">Docker Swarm</span>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="topic-body"><ul>
+          <li>Docker Swarm is Docker's native clustering and orchestration tool — runs and manages containers across multiple machines (a "swarm" of nodes).</li>
+          <li>It turns a group of Docker hosts into a single virtual Docker host — you deploy once, Swarm handles the distribution.</li>
+          <li>Manager Node: Controls the swarm, accepts deploy commands, and distributes work to worker nodes.</li>
+          <li>Worker Node: Actually runs the containers assigned by the manager. Workers don't make scheduling decisions.</li>
+          <li>Services in Swarm: Instead of running containers, you deploy "services" — Swarm ensures the desired number of replicas are always running.</li>
+          <li>Self-healing: If a container crashes, Swarm automatically starts a replacement on another node — zero manual intervention.</li>
+          <li>Docker Swarm vs Kubernetes: Swarm is simpler and built into Docker. Kubernetes (K8s) is more powerful and the industry standard for large-scale production.</li>
+        </ul></div>
+      </div>
+
+      <div class="topic-card">
+        <div class="topic-card-header" onclick="toggle(this)">
+          <span class="topic-icon">🔌</span>
+          <span class="topic-name">Docker Attach & CLI Deep Dive</span>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="topic-body"><ul>
+          <li>docker attach [container]: Connects your terminal to a running container's main process — you see its live output and can send input.</li>
+          <li>Difference from exec: `attach` connects to the MAIN process (PID 1). `exec` runs a NEW process inside the container (e.g., a new bash shell).</li>
+          <li>CTRL+P then CTRL+Q: Detach from an attached container WITHOUT stopping it — leaves it running in background.</li>
+          <li>docker logs [container]: View stdout/stderr output from a container without attaching. `-f` flag follows logs in real-time like `tail -f`.</li>
+          <li>docker inspect [container]: Returns detailed JSON with all container settings — IP address, mount points, environment variables, network config.</li>
+          <li>docker stats: Real-time monitoring — shows CPU, memory, network I/O, and disk I/O for all running containers.</li>
+          <li>docker cp [container]:[path] [local-path]: Copies files between a container and your local filesystem — useful for extracting logs or configs.</li>
+        </ul></div>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+<footer>GOOD LUCK ON YOUR EXAM · YOU GOT THIS · DEVOPS STUDY GUIDE 2024</footer>
+
+<script>
+  function toggle(header) {
+    const card = header.parentElement;
+    card.classList.toggle('open');
+  }
+
+  function expandAll(moduleId) {
+    const section = document.getElementById(moduleId);
+    const cards = section.querySelectorAll('.topic-card');
+    const allOpen = [...cards].every(c => c.classList.contains('open'));
+    cards.forEach(card => {
+      if (allOpen) card.classList.remove('open');
+      else card.classList.add('open');
+    });
+  }
+
+  function scrollTo(id) {
+    document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+  }
+
+  // Update active nav on scroll
+  const sections = document.querySelectorAll('.module-section');
+  const navBtns = document.querySelectorAll('.nav-btn');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 200) current = s.id;
+    });
+    navBtns.forEach((btn, i) => {
+      btn.classList.toggle('active', i === ['m1','m2','m3','m4','m5'].indexOf(current));
+    });
+  });
+</script>
+</body>
+</html>
