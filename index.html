@@ -16,6 +16,8 @@
     --accent3: #f5a000;
     --accent4: #f500a0;
     --accent5: #a000f5;
+    --ia1: #ff6b35;
+    --ia2: #35ff6b;
     --text: #e8e8f0;
     --muted: #8888aa;
     --font-head: 'Syne', sans-serif;
@@ -32,7 +34,6 @@
     overflow-x: hidden;
   }
 
-  /* Animated grid background */
   body::before {
     content: '';
     position: fixed;
@@ -89,7 +90,6 @@
     letter-spacing: 1px;
   }
 
-  /* Module nav */
   .module-nav {
     position: sticky;
     top: 0;
@@ -126,7 +126,12 @@
     background: rgba(0,245,160,0.08);
   }
 
-  /* Main layout */
+  .nav-btn.ia-nav:hover, .nav-btn.ia-nav.active {
+    border-color: var(--ia1);
+    color: var(--ia1);
+    background: rgba(255,107,53,0.08);
+  }
+
   .container {
     position: relative;
     z-index: 1;
@@ -147,6 +152,8 @@
   .module-section:nth-child(3) { animation-delay: 0.25s; }
   .module-section:nth-child(4) { animation-delay: 0.35s; }
   .module-section:nth-child(5) { animation-delay: 0.45s; }
+  .module-section:nth-child(6) { animation-delay: 0.55s; }
+  .module-section:nth-child(7) { animation-delay: 0.60s; }
 
   @keyframes fadeUp {
     to { opacity: 1; transform: translateY(0); }
@@ -174,6 +181,8 @@
   .m3 .module-number { color: var(--accent3); }
   .m4 .module-number { color: var(--accent4); }
   .m5 .module-number { color: var(--accent5); }
+  .ia1 .module-number { color: var(--ia1); }
+  .ia2 .module-number { color: var(--ia2); }
 
   .module-title-wrap h2 {
     font-family: var(--font-head);
@@ -188,7 +197,6 @@
     letter-spacing: 2px;
   }
 
-  /* Topics grid */
   .topics-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -203,15 +211,15 @@
     transition: border-color 0.2s, transform 0.2s;
   }
 
-  .topic-card:hover {
-    transform: translateY(-2px);
-  }
+  .topic-card:hover { transform: translateY(-2px); }
 
   .m1 .topic-card:hover { border-color: var(--accent1); }
   .m2 .topic-card:hover { border-color: var(--accent2); }
   .m3 .topic-card:hover { border-color: var(--accent3); }
   .m4 .topic-card:hover { border-color: var(--accent4); }
   .m5 .topic-card:hover { border-color: var(--accent5); }
+  .ia1 .topic-card:hover { border-color: var(--ia1); }
+  .ia2 .topic-card:hover { border-color: var(--ia2); }
 
   .topic-card-header {
     padding: 14px 16px 10px;
@@ -222,10 +230,7 @@
     user-select: none;
   }
 
-  .topic-icon {
-    font-size: 18px;
-    min-width: 24px;
-  }
+  .topic-icon { font-size: 18px; min-width: 24px; }
 
   .topic-name {
     font-family: var(--font-head);
@@ -248,7 +253,7 @@
     transition: max-height 0.4s ease;
   }
 
-  .topic-card.open .topic-body { max-height: 1000px; }
+  .topic-card.open .topic-body { max-height: 3000px; }
 
   .topic-body ul {
     list-style: none;
@@ -282,6 +287,8 @@
   .m3 .topic-card.open .topic-body ul li::before { color: var(--accent3); }
   .m4 .topic-card.open .topic-body ul li::before { color: var(--accent4); }
   .m5 .topic-card.open .topic-body ul li::before { color: var(--accent5); }
+  .ia1 .topic-card.open .topic-body ul li::before { color: var(--ia1); }
+  .ia2 .topic-card.open .topic-body ul li::before { color: var(--ia2); }
 
   .expand-all-btn {
     background: transparent;
@@ -298,7 +305,369 @@
   }
   .expand-all-btn:hover { color: var(--text); border-color: var(--text); }
 
-  /* Footer */
+  /* IA EXAM SECTIONS SPECIAL STYLES */
+  .ia-banner {
+    background: linear-gradient(135deg, rgba(255,107,53,0.15), rgba(255,107,53,0.05));
+    border: 1px solid var(--ia1);
+    border-radius: 6px;
+    padding: 20px 24px;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .ia2 .ia-banner {
+    background: linear-gradient(135deg, rgba(53,255,107,0.15), rgba(53,255,107,0.05));
+    border-color: var(--ia2);
+  }
+
+  .ia-banner-icon { font-size: 36px; }
+
+  .ia-banner-text h3 {
+    font-family: var(--font-head);
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--ia1);
+    margin-bottom: 4px;
+  }
+
+  .ia2 .ia-banner-text h3 { color: var(--ia2); }
+
+  .ia-banner-text p {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 1px;
+  }
+
+  .marks-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+
+  .marks-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 16px;
+    text-align: center;
+  }
+
+  .marks-box .marks-num {
+    font-family: var(--font-head);
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--ia1);
+    display: block;
+  }
+
+  .ia2 .marks-box .marks-num { color: var(--ia2); }
+
+  .marks-box .marks-label {
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    margin-top: 4px;
+    display: block;
+  }
+
+  /* Q&A card style */
+  .qa-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 12px;
+    transition: border-color 0.2s;
+  }
+
+  .ia1 .qa-card:hover { border-color: var(--ia1); }
+  .ia2 .qa-card:hover { border-color: var(--ia2); }
+
+  .qa-header {
+    padding: 14px 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .q-badge {
+    font-family: var(--font-head);
+    font-size: 11px;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 2px;
+    background: rgba(255,107,53,0.2);
+    color: var(--ia1);
+    min-width: 32px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .ia2 .q-badge {
+    background: rgba(53,255,107,0.2);
+    color: var(--ia2);
+  }
+
+  .q-badge.partA { background: rgba(0,245,160,0.15); color: var(--accent1); }
+  .q-badge.partB { background: rgba(0,217,245,0.15); color: var(--accent2); }
+  .q-badge.partC { background: rgba(160,0,245,0.15); color: var(--accent5); }
+
+  .q-text {
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.5;
+    flex: 1;
+  }
+
+  .q-marks {
+    font-size: 11px;
+    color: var(--muted);
+    flex-shrink: 0;
+    padding-top: 2px;
+  }
+
+  .qa-chevron {
+    font-size: 12px;
+    color: var(--muted);
+    transition: transform 0.3s;
+    flex-shrink: 0;
+  }
+
+  .qa-card.open .qa-chevron { transform: rotate(180deg); }
+
+  .qa-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+  }
+
+  .qa-card.open .qa-body { max-height: 5000px; }
+
+  .qa-answer {
+    padding: 16px 20px 20px;
+    border-top: 1px solid var(--border);
+  }
+
+  .qa-answer h4 {
+    font-family: var(--font-head);
+    font-size: 12px;
+    color: var(--ia1);
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+  }
+
+  .ia2 .qa-answer h4 { color: var(--ia2); }
+
+  .qa-answer p {
+    font-size: 12px;
+    line-height: 1.7;
+    color: #c0c0d8;
+    margin-bottom: 10px;
+  }
+
+  .qa-answer ul {
+    list-style: none;
+    margin-bottom: 12px;
+  }
+
+  .qa-answer ul li {
+    position: relative;
+    padding: 4px 0 4px 18px;
+    font-size: 12px;
+    line-height: 1.6;
+    color: #c0c0d8;
+  }
+
+  .qa-answer ul li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--ia1);
+    font-size: 10px;
+  }
+
+  .ia2 .qa-answer ul li::before { color: var(--ia2); }
+
+  /* Flowchart styles */
+  .flowchart {
+    margin: 16px 0;
+    overflow-x: auto;
+  }
+
+  .flow-chain {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    flex-wrap: wrap;
+    padding: 8px 0;
+  }
+
+  .flow-box {
+    background: rgba(0,245,160,0.08);
+    border: 1px solid var(--accent1);
+    border-radius: 4px;
+    padding: 8px 14px;
+    font-size: 11px;
+    font-family: var(--font-mono);
+    color: var(--accent1);
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  .flow-box.orange { background: rgba(245,160,0,0.08); border-color: var(--accent3); color: var(--accent3); }
+  .flow-box.pink { background: rgba(245,0,160,0.08); border-color: var(--accent4); color: var(--accent4); }
+  .flow-box.purple { background: rgba(160,0,245,0.08); border-color: var(--accent5); color: var(--accent5); }
+  .flow-box.blue { background: rgba(0,217,245,0.08); border-color: var(--accent2); color: var(--accent2); }
+  .flow-box.ia1c { background: rgba(255,107,53,0.08); border-color: var(--ia1); color: var(--ia1); }
+  .flow-box.ia2c { background: rgba(53,255,107,0.08); border-color: var(--ia2); color: var(--ia2); }
+
+  .flow-arrow {
+    font-size: 16px;
+    color: var(--muted);
+    padding: 0 6px;
+  }
+
+  .flow-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  .flow-down {
+    font-size: 16px;
+    color: var(--muted);
+    line-height: 1;
+    padding: 2px 0;
+  }
+
+  .flow-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 8px;
+    margin: 12px 0;
+  }
+
+  .flow-node {
+    background: rgba(0,245,160,0.06);
+    border: 1px solid rgba(0,245,160,0.3);
+    border-radius: 4px;
+    padding: 10px 12px;
+    font-size: 11px;
+    text-align: center;
+  }
+
+  .flow-node .node-num {
+    font-family: var(--font-head);
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--accent1);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .flow-node .node-label {
+    color: #c0c0d8;
+    font-size: 10px;
+    letter-spacing: 1px;
+  }
+
+  .flow-node.orange-node { background: rgba(245,160,0,0.06); border-color: rgba(245,160,0,0.3); }
+  .flow-node.orange-node .node-num { color: var(--accent3); }
+
+  .comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11px;
+    margin: 12px 0;
+  }
+
+  .comparison-table th {
+    background: rgba(0,245,160,0.1);
+    color: var(--accent1);
+    padding: 8px 10px;
+    text-align: left;
+    border: 1px solid var(--border);
+    font-family: var(--font-head);
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
+
+  .comparison-table td {
+    padding: 8px 10px;
+    border: 1px solid var(--border);
+    color: #c0c0d8;
+    vertical-align: top;
+  }
+
+  .comparison-table tr:nth-child(even) td {
+    background: rgba(255,255,255,0.02);
+  }
+
+  .part-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 20px 0 14px;
+  }
+
+  .part-label {
+    font-family: var(--font-head);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    color: var(--ia1);
+    white-space: nowrap;
+  }
+
+  .ia2 .part-label { color: var(--ia2); }
+
+  .part-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .part-info {
+    font-size: 10px;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .tip-box {
+    background: rgba(245,160,0,0.08);
+    border: 1px solid rgba(245,160,0,0.3);
+    border-radius: 4px;
+    padding: 10px 14px;
+    font-size: 11px;
+    color: var(--accent3);
+    margin: 10px 0;
+  }
+
+  .tip-box::before {
+    content: '💡 TIP: ';
+    font-weight: 700;
+  }
+
+  .code-block {
+    background: #0d0d18;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 12px 14px;
+    font-size: 11px;
+    color: var(--accent2);
+    margin: 10px 0;
+    overflow-x: auto;
+    white-space: pre;
+    font-family: var(--font-mono);
+    line-height: 1.6;
+  }
+
   footer {
     position: relative;
     z-index: 1;
@@ -309,6 +678,12 @@
     border-top: 1px solid var(--border);
     letter-spacing: 2px;
   }
+
+  @media (max-width: 600px) {
+    .marks-grid { grid-template-columns: repeat(3, 1fr); }
+    .flow-chain { gap: 4px; }
+    .flow-box { font-size: 10px; padding: 6px 10px; }
+  }
 </style>
 </head>
 <body>
@@ -316,15 +691,17 @@
 <div class="hero">
   <div class="hero-badge">⚡ EXAM TOMORROW — YOU GOT THIS</div>
   <h1>DevOps<br>Study Guide</h1>
-  <p>5 MODULES · ALL TOPICS EXPLAINED · CLICK TO EXPAND</p>
+  <p>5 MODULES + IA-1 + IA-2 · ALL ANSWERS EXPLAINED · CLICK TO EXPAND</p>
 </div>
 
 <nav class="module-nav">
-  <button class="nav-btn active" onclick="scrollTo('m1')">M1 · Intro to DevOps</button>
-  <button class="nav-btn" onclick="scrollTo('m2')">M2 · Git</button>
-  <button class="nav-btn" onclick="scrollTo('m3')">M3 · Jenkins</button>
-  <button class="nav-btn" onclick="scrollTo('m4')">M4 · Maven</button>
-  <button class="nav-btn" onclick="scrollTo('m5')">M5 · Docker</button>
+  <button class="nav-btn active" onclick="scrollToSec('m1')">M1 · Intro to DevOps</button>
+  <button class="nav-btn" onclick="scrollToSec('m2')">M2 · Git</button>
+  <button class="nav-btn" onclick="scrollToSec('m3')">M3 · Jenkins</button>
+  <button class="nav-btn" onclick="scrollToSec('m4')">M4 · Maven</button>
+  <button class="nav-btn" onclick="scrollToSec('m5')">M5 · Docker</button>
+  <button class="nav-btn ia-nav" onclick="scrollToSec('ia1')">📝 IA-1 EXAM</button>
+  <button class="nav-btn ia-nav" onclick="scrollToSec('ia2')">📝 IA-2 EXAM</button>
 </nav>
 
 <div class="container">
@@ -1050,12 +1427,1193 @@
     </div>
   </section>
 
+  <!-- ===== IA-1 EXAM SECTION ===== -->
+  <section class="module-section ia1" id="ia1">
+    <div class="module-header">
+      <div class="module-number">IA1</div>
+      <div class="module-title-wrap">
+        <h2>Internal Assessment — 1</h2>
+        <p>MODULES 1 & 2 · ALL QUESTIONS ANSWERED</p>
+      </div>
+    </div>
+
+    <div class="ia-banner">
+      <div class="ia-banner-icon">📝</div>
+      <div class="ia-banner-text">
+        <h3>IA-1 EXAM PAPER</h3>
+        <p>COVERS MODULE 1 (DevOps Intro) + MODULE 2 (Git) · CLICK ANY QUESTION TO SEE THE FULL ANSWER</p>
+      </div>
+    </div>
+
+    <div class="marks-grid">
+      <div class="marks-box"><span class="marks-num">10</span><span class="marks-label">PART A MARKS</span></div>
+      <div class="marks-box"><span class="marks-num">20</span><span class="marks-label">PART B MARKS</span></div>
+      <div class="marks-box"><span class="marks-num">20</span><span class="marks-label">PART C MARKS</span></div>
+    </div>
+
+    <!-- PART A -->
+    <div class="part-divider">
+      <span class="part-label">PART A</span>
+      <div class="part-line"></div>
+      <span class="part-info">5 × 2 = 10 MARKS · ANSWER ALL</span>
+    </div>
+
+    <!-- Q1 -->
+    <div class="qa-card" id="ia1q1">
+      <div class="qa-header" onclick="toggleQA(this)">
+        <span class="q-badge partA">Q1</span>
+        <span class="q-text">State any two differences between Waterfall and Agile models.</span>
+        <span class="q-marks">2 marks</span>
+        <span class="qa-chevron">▼</span>
+      </div>
+      <div class="qa-body">
+        <div class="qa-answer">
+          <h4>ANSWER — 2 MARKS</h4>
+          <div class="flowchart">
+            <table class="comparison-table">
+              <tr><th>Waterfall Model</th><th>Agile Model</th></tr>
+              <tr><td>Linear and sequential — phases run one after another</td><td>Iterative and incremental — work done in small cycles (sprints)</td></tr>
+              <tr><td>Requirements fixed at the start — changes are very hard to make</td><td>Requirements can change between sprints — very flexible</td></tr>
+              <tr><td>Testing happens only after full development is done</td><td>Testing happens in every sprint — continuous testing</td></tr>
+              <tr><td>Customer sees the product only at the end</td><td>Customer sees working software after every sprint</td></tr>
+              <tr><td>High risk — problems found late are expensive to fix</td><td>Low risk — small releases mean small problems caught early</td></tr>
+            </table>
+          </div>
+          <div class="tip-box">For 2 marks — just write any 2 rows from the table above. One point per difference.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="qa-card" id="ia1q2">
+      <div class="qa-header" onclick="toggleQA(this)">
+        <span class="q-badge partA">Q2</span>
+        <span class="q-text">Write any two objectives of DevOps.</span>
+        <span class="q-marks">2 marks</span>
+        <span class="qa-chevron">▼</span>
+      </div>
+      <div class="qa-body">
+        <div class="qa-answer">
+          <h4>ANSWER — 2 MARKS</h4>
+          <ul>
+            <li><strong>Faster Software Delivery:</strong> DevOps aims to deploy software updates frequently and quickly — moving from months to hours between releases. This is done through automation of build, test, and deploy processes.</li>
+            <li><strong>Improved Collaboration:</strong> DevOps breaks the wall between Development and Operations teams. Both teams share responsibility, use common tools, and communicate openly — leading to fewer conflicts and faster problem solving.</li>
+            <li><strong>Higher Quality through Automation:</strong> Automated testing ensures bugs are caught early, before code reaches production — reducing defects and improving reliability.</li>
+            <li><strong>Reduced Deployment Risk:</strong> Smaller, more frequent releases mean each change is small — making it easier to detect issues and roll back if something breaks.</li>
+          </ul>
+          <div class="tip-box">Pick any 2 from above. Write 1-2 sentences each.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="qa-card" id="ia1q3">
+      <div class="qa-header" onclick="toggleQA(this)">
+        <span class="q-badge partA">Q3</span>
+        <span class="q-text">Define Configuration Management.</span>
+        <span class="q-marks">2 marks</span>
+        <span class="qa-chevron">▼</span>
+      </div>
+      <div class="qa-body">
+        <div class="qa-answer">
+          <h4>ANSWER — 2 MARKS</h4>
+          <p><strong>Definition:</strong> Configuration Management (CM) is the process of automatically managing, controlling, and maintaining the settings and software on computer servers and infrastructure — ensuring they are always in a consistent, desired state.</p>
+          <ul>
+            <li>Instead of manually logging into each server to install software or change settings, CM tools automate this for all servers at once.</li>
+            <li>CM tools include Ansible, Puppet, and Chef.</li>
+            <li>Key concept — <strong>Idempotency:</strong> Running a CM tool multiple times always produces the same result. If a server drifts from the desired state, the tool corrects it automatically.</li>
+            <li>Example: If you need to install Nginx on 200 servers — write one Ansible Playbook and run it. Done in minutes.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="qa-card" id="ia1q4">
+      <div class="qa-header" onclick="toggleQA(this)">
+        <span class="q-badge partA">Q4</span>
+        <span class="q-text">What is git reset used for?</span>
+        <span class="q-marks">2 marks</span>
+        <span class="qa-chevron">▼</span>
+      </div>
+      <div class="qa-body">
+        <div class="qa-answer">
+          <h4>ANSWER — 2 MARKS</h4>
+          <p><strong>git reset</strong> is used to undo commits or unstage files — it moves the HEAD pointer back to a previous commit.</p>
+          <div class="flowchart">
+            <div class="flow-grid">
+              <div class="flow-node"><span class="node-num" style="font-size:13px">--soft</span><span class="node-label">Undo commit. Keep changes STAGED</span></div>
+              <div class="flow-node orange-node"><span class="node-num" style="font-size:13px">--mixed</span><span class="node-label">Undo commit. Unstage changes. Keep in files</span></div>
+              <div class="flow-node" style="background:rgba(245,0,160,0.06);border-color:rgba(245,0,160,0.3)"><span class="node-num" style="font-size:13px;color:var(--accent4)">--hard</span><span class="node-label">⚠ Destroys commit AND all changes permanently</span></div>
+            </div>
+          </div>
+          <ul>
+            <li>Use case: You committed code with a mistake. Use `git reset --soft HEAD~1` to undo the commit without losing your code.</li>
+            <li>`git reset HEAD filename` — removes a specific file from the staging area (unstages it) without changing the file.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="qa-card" id="ia1q5">
+      <div class="qa-header" onclick="toggleQA(this)">
+        <span class="q-badge partA">Q5</span>
+        <span class="q-text">What is a remote repository?</span>
+        <span class="q-marks">2 marks</span>
+        <span class="qa-chevron">▼</span>
+      </div>
+      <div class="qa-body">
+        <div class="qa-answer">
+          <h4>ANSWER — 2 MARKS</h4>
+          <p><strong>Remote Repository:</strong> A repository stored on a remote server (like GitHub, GitLab, or Bitbucket) that is accessible over the internet. It acts as the central, shared version of the project that all team members push to and pull from.</p>
+          <div class="flowchart">
+            <div class="flow-chain" style="justify-content:center; flex-wrap:wrap; gap:6px">
+              <div class="flow-box">Developer A (Local)</div>
+              <div class="flow-arrow">⇄</div>
+              <div class="flow-box orange">Remote Repo (GitHub)</div>
+              <div class="flow-arrow">⇄</div>
+              <div class="flow-box blue">Developer B (Local)</div>
+            </div>
+          </div>
+          <ul>
+            <li><strong>git remote -v</strong>: Shows the remote repository URL linked to your local repo.</li>
+            <li><strong>git push</strong>: Sends local commits to the remote repository.</li>
+            <li><strong>git pull</strong>: Fetches + merges changes from remote into your local branch.</li>
+            <li>By convention, the default remote is named <strong>origin</strong>.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- PART B -->
+    <div class="part-divider">
+      <span class="part-label">PART B</span>
+      <div class="part-line"></div>
+      <span class="part-info">4 × 5 = 20 MARKS · ANSWER ANY 4 OF 5</span>
+    </div>
+
+    <!-- Q6 -->
+    <div class="qa-card" id="ia1q6">
+      <div class="qa-header" onclick="toggleQA(this)">
+        <span class="q-badge partB">Q6</span>
+        <span class="q-text">Explain the history and evolution of DevOps.</span>
+        <span class="q-marks">5 marks</span>
+        <span class="qa-chevron">▼</span>
+      </div>
+      <div class="qa-body">
+        <div class="qa-answer">
+          <h4>ANSWER — 5 MARKS</h4>
+          <p><strong>Before DevOps — The Problem Era (Pre 2008):</strong> Development teams wrote code. Operations teams deployed and maintained servers. These two worked in silos — Dev would write code and "throw it over the wall" to Ops. When deployments failed, blame games began. This created slow releases, frequent production issues, and team conflict.</p>
+          <div class="flowchart">
+            <div class="flow-chain" style="flex-direction:column; align-items:flex-start; gap:4px;">
+              <div style="display:flex;align-items:center;gap:8px"><div class="flow-box" style="min-width:80px">Pre-2008</div><span style="font-size:12px;color:#c0c0d8">→ Dev vs Ops silos. "Works on my machine!" problems. Slow releases.</span></div>
+              <div style="display:flex;align-items:center;gap:8px"><div class="flow-box orange" style="min-width:80px">2008</div><span style="font-size:12px;color:#c0c0d8">→ Patrick Debois + Andrew Shafer discuss "Agile Infrastructure" at Agile Conference.</span></div>
+              <div style="display:flex;align-items:center;gap:8px"><div class="flow-box blue" style="min-width:80px">2009</div><span style="font-size:12px;color:#c0c0d8">→ First DevOpsDays in Ghent, Belgium. Term "DevOps" coined on Twitter (#devops).</span></div>
+              <div style="display:flex;align-items:center;gap:8px"><div class="flow-box purple" style="min-width:80px">2010-13</div><span style="font-size:12px;color:#c0c0d8">→ Tools emerge: Puppet, Chef, Vagrant, Docker. "Phoenix Project" book popularizes DevOps.</span></div>
+              <div style="display:flex;align-items:center;gap:8px"><div class="flow-box ia1c" style="min-width:80px">2013-17</div><span style="font-size:12px;color:#c0c0d8">→ Docker (2013) & Kubernetes (2014) change containerization. Jenkins becomes standard CI/CD.</span></div>
+              <div style="display:flex;align-items:center;gap:8px"><div class="flow-box ia2c" style="min-width:80px">Today</div><span style="font-size:12px;color:#c0c0d8">→ DevOps is industry standard. Cloud-native DevOps. GitOps. Platform Engineering era.</span></div>
+            </div>
+          </div>
+          <ul>
+            <li><strong>Key Drivers:</strong> Agile movement showed fast development was possible. Cloud computing made fast infrastructure available. Internet companies (Amazon, Netflix) proved frequent releases work at massive scale.</li>
+            <li><strong>The CAMS Model</strong> (John Willis & Damon Edwards, 2010): Culture, Automation, Measurement, Sharing — the four pillars of DevOps.</li>
+            <li><strong>Amazon:</strong> In 2011, Amazon deployed code every 11.6 seconds — proof that DevOps at scale was real and valuable.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="qa-card" id="ia1q7">
+      <div class="qa-header" onclick="toggleQA(this)">
+        <span class="q-badge partB">Q7</span>
+        <span class="q-text">Describe the Docker architecture and its components.</span>
+        <span class="q-marks">5 marks</span>
+        <span class="qa-chevron">▼</span>
+      </div>
+      <div class="qa-body">
+        <div class="qa-answer">
+          <h4>ANSWER — 5 MARKS</h4>
+          <p>Docker uses a <strong>Client-Server architecture</strong>. The Docker Client talks to the Docker Daemon (server) which does all the heavy lifting.</p>
+          <div class="flowchart">
+            <div class="flow-chain" style="justify-content:center;flex-wrap:wrap;gap:6px;margin-bottom:12px">
+              <div class="flow-col">
+                <div class="flow-box">USER types command</div>
+                <div class="flow-down">↓</div>
+                <div class="flow-box">Docker CLI (client)</div>
+              </div>
+              <div class="flow-arrow" style="margin-top:-20px">→ REST API →</div>
+              <div class="flow-col">
+                <div class="flow-box orange">Docker Daemon (dockerd)</div>
+                <div class="flow-down">↓</div>
+                <div class="flow-box orange">Manages: Images, Containers, Networks, Volumes</div>
+              </div>
+              <div class="flow-arrow" style="margin-top:-20px">→</div>
+              <div class="flow-col">
+                <div class="flow-box blue">Docker Registry</div>
+                <div class="flow-down">↓</div>
+                <div class="flow-box blue">(Docker Hub)</div>
+              </div>
+            </div>
+          </div>
+          <ul>
+            <li><strong>Docker Client:</strong> The command-line tool (docker) you type commands into. It sends instructions to the daemon via REST API. Can be on the same machine or remote.</li>
+            <li><strong>Docker Daemon (dockerd):</strong> Background process that does the actual work — builds images, runs containers, manages networks and volumes.</li>
+            <li><strong>Docker Images:</strong> Read-only templates built from Dockerfiles. Stored in layers. Used to create containers.</li>
+            <li><strong>Docker Containers:</strong> Running instances of images. Isolated process with own filesystem and network. Lightweight — starts in seconds.</li>
+            <li><strong>Docker Registry:</strong> Storage for Docker images. Docker Hub is the public default registry. DTR (Docker Trusted Registry) is for private enterprise use.</li>
+            <li><strong>Docker Objects:</strong> Images, Containers, Networks (for container communication), Volumes (for persistent data storage).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="qa-card" id="ia1q8">
+      <div class="qa-header" onclick="toggleQA(this)">
+        <span class="q-badge partB">Q8</span>
+        <span class="q-text">Compare Ansible, Puppet, and Chef.</span>
+        <span class="q-marks">5 marks</span>
+        <span class="qa-chevron">▼</span>
+      </div>
+      <div class="qa-body">
+        <div class="qa-answer">
+          <h4>ANSWER — 5 MARKS</h4>
+          <table class="comparison-table">
+            <tr><th>Feature</th><th>Ansible</th><th>Puppet</th><th>Chef</th></tr>
+            <tr><td>Language</td><td>YAML (Playbooks)</td><td>Puppet DSL (own language)</td><td>Ruby (Recipes/Cookbooks)</td></tr>
+            <tr><td>Agent Required?</td><td>NO — Agentless (uses SSH)</td><td>YES — Agent on every server</td><td>YES — Chef Client agent needed</td></tr>
+            <tr><td>Model</td><td>Push-based (master pushes to servers)</td><td>Pull-based (servers pull from master)</td><td>Pull-based (servers pull from Chef Server)</td></tr>
+            <tr><td>Ease of Learning</td><td>Easiest — just YAML</td><td>Medium — need to learn Puppet DSL</td><td>Hard — need Ruby knowledge</td></tr>
+            <tr><td>Config Files</td><td>Playbooks (.yml)</td><td>Manifests (.pp)</td><td>Recipes & Cookbooks (.rb)</td></tr>
+            <tr><td>Master Node</td><td>Not required (can run from any machine)</td><td>Puppet Master required</td><td>Chef Server required</td></tr>
+            <tr><td>Best For</td><td>Simple automation, quick setup</td><td>Large-scale, complex infrastructure</td><td>Highly customized, complex setups</td></tr>
+          </table>
+          <p><strong>Summary to remember:</strong> Ansible = Simple & No Agent. Puppet = Pull-based with its own language. Chef = Ruby-based, most powerful but hardest to learn.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q9 -->
+    <div class="qa-card" id="ia1q9">
+      <div class="qa-header" onclick="toggleQA(this)">
+        <span class="q-badge partB">Q9</span>
+        <span class="q-text">Explain the purpose and working of git stash, reset, and checkout.</span>
+        <span class="q-marks">5 marks</span>
+        <span class="qa-chevron">▼</span>
+      </div>
+      <div class="qa-body">
+        <div class="qa-answer">
+          <h4>ANSWER — 5 MARKS</h4>
+          <p><strong>1. git stash — Temporarily Save Work</strong></p>
+          <p>Purpose: Save unfinished, uncommitted changes temporarily so you can switch context (e.g., fix an urgent bug).</p>
+          <div class="flowchart">
+            <div class="flow-chain" style="gap:4px;flex-wrap:wrap">
+              <div class="flow-box">Working on Feature</div>
+              <div class="flow-arrow">→</div>
+              <div class="flow-box orange">git stash (save aside)</div>
+              <div class="flow-arrow">→</div>
+              <div class="flow-box blue">Fix Urgent Bug</div>
+              <div class="flow-arrow">→</div>
+              <div class="flow-box ia2c">git stash pop (restore)</div>
+              <div class="flow-arrow">→</div>
+              <div class="flow-box">Continue Feature</div>
+            </div>
+          </div>
+          <ul>
+            <li>`git stash` — saves all uncommitted changes and cleans working directory.</li>
+            <li>`git stash pop` — restores latest stash and removes it from stash list.</li>
+            <li>`git stash list` — shows all saved stashes.</li>
+          </ul>
+          <p><strong>2. git reset — Undo Commits</strong></p>
+          <p>Purpose: Move HEAD pointer back to undo commits. Three modes exist:</p>
+          <ul>
+            <li>`git reset --soft HEAD~1` → Undo commit, keep changes STAGED.</li>
+            <li>`git reset --mixed HEAD~1` → Undo commit, keep changes in working directory (unstaged).</li>
+            <li>`git reset --hard HEAD~1` → ⚠️ Permanently destroy commit and all changes.</li>
+          </ul>
+          <p><strong>3. git checkout — Switch Context</strong></p>
+          <p>Purpose: Switch branches or restore files to a previous state.</p>
+          <ul>
+            <li>`git checkout branchname` → Switch to another branch.</li>
+            <li>`git checkout filename` → Discard changes to a file, restore from last commit.</li>
+            <li>`git checkout -b newbranch` → Create a new branch and switch to it immediately.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q10 -->
+    <div class="qa-card" id="ia1q10">
+      <div class="qa-header" onclick="toggleQA(this)">
+        <span class="q-badge partB">Q10</span>
+        <span class="q-text">Illustrate GitHub project management features.</span>
+        <span class="q-marks">5 marks</span>
+        <span class="qa-chevron">▼</span>
+      </div>
+      <div class="qa-body">
+        <div class="qa-answer">
+          <h4>ANSWER — 5 MARKS</h4>
+          <p>GitHub provides powerful built-in project management tools for software teams:</p>
+          <ul>
+            <li><strong>Issues:</strong> Like a to-do list for a repository. Create issues for bugs, feature requests, or tasks. Assign to team members. Add labels (bug, enhancement, urgent). Track progress with comments.</li>
+            <li><strong>GitHub Projects (Kanban Board):</strong> Visual board with columns like "To Do → In Progress → Review → Done." Issues and Pull Requests move across columns as work progresses. Teams see the full picture at a glance.</li>
+            <li><strong>Pull Requests (PRs):</strong> When code is ready, create a PR to merge your branch into main. Team members review code, leave comments, request changes. Only approved code gets merged — quality control built-in.</li>
+            <li><strong>Milestones:</strong> Group issues and PRs under a goal with a due date. Example: "Version 2.0 Release" milestone groups all tasks needed for that release.</li>
+            <li><strong>Labels:</strong> Color-coded tags on issues/PRs — "bug," "high priority," "help wanted." Makes filtering and searching fast.</li>
+            <li><strong>GitHub Actions:</strong> Automate workflows triggered by events. PR opened → run tests automatically → notify team on Slack. Full CI/CD without leaving GitHub.</li>
+            <li><strong>Wiki:</strong> Built-in documentation pages for the project — architecture docs, setup guides, team processes.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- PART C -->
+    <div class="part-divider">
+      <span class="part-label">PART C</span>
+      <div class="part-line"></div>
+      <span class="part-info">2 × 10 = 20 MARKS · ANSWER ANY 2 OF 3</span>
+    </div>
+
+    <!-- Q11 -->
+    <div class="qa-card" id="ia1q11">
+      <div class="qa-header" onclick="toggleQA(this)">
+        <span class="q-badge partC">Q11</span>
+        <span class="q-text">Illustrate a simple CI/CD pipeline for a web application using Jenkins and Docker.</span>
+        <span class="q-marks">10 marks</span>
+        <span class="qa-chevron">▼</span>
+      </div>
+      <div class="qa-body">
+        <div class="qa-answer">
+          <h4>ANSWER — 10 MARKS</h4>
+          <p>A CI/CD pipeline automates the journey from writing code to deploying it in production. Here is how it works with Jenkins + Docker:</p>
+          <p><strong>Complete Pipeline Flow:</strong></p>
+          <div class="flowchart">
+            <div class="flow-col" style="align-items:stretch;gap:4px">
+              <div class="flow-chain" style="justify-content:center;gap:4px;flex-wrap:wrap">
+                <div class="flow-box ia1c">① Developer writes code</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-box ia1c">② git push to GitHub</div>
+              </div>
+              <div class="flow-down" style="text-align:center">↓ Webhook triggers Jenkins</div>
+              <div class="flow-chain" style="justify-content:center;gap:4px;flex-wrap:wrap">
+                <div class="flow-box orange">③ Jenkins pulls code</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-box orange">④ Maven Build (mvn package)</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-box orange">⑤ Run Unit Tests</div>
+              </div>
+              <div class="flow-down" style="text-align:center">↓ Tests Pass?</div>
+              <div class="flow-chain" style="justify-content:center;gap:4px;flex-wrap:wrap">
+                <div class="flow-box blue">⑥ Docker Build Image</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-box blue">⑦ Push to Docker Hub</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-box ia2c">⑧ Deploy Container to Server</div>
+              </div>
+            </div>
+          </div>
+          <p><strong>Sample Jenkinsfile:</strong></p>
+          <div class="code-block">pipeline {
+  agent any
+  stages {
+    stage('Checkout') {
+      steps { git 'https://github.com/myorg/webapp.git' }
+    }
+    stage('Build') {
+      steps { sh 'mvn clean package -DskipTests' }
+    }
+    stage('Test') {
+      steps { sh 'mvn test' }
+    }
+    stage('Docker Build') {
+      steps { sh 'docker build -t myapp:latest .' }
+    }
+    stage('Docker Push') {
+      steps {
+        sh 'docker login -u $DOCKER_USER -p $DOCKER_PASS'
+        sh 'docker push myapp:latest'
+      }
+    }
+    stage('Deploy') {
+      steps {
+        sh 'docker stop myapp || true'
+        sh 'docker rm myapp || true'
+        sh 'docker run -d -p 80:8080 --name myapp myapp:latest'
+      }
+    }
+  }
+  post {
+    success { echo 'Deployment Successful!' }
+    failure { echo 'Pipeline Failed. Check logs.' }
+  }
+}</div>
+          <ul>
+            <li><strong>Stage 1 — Checkout:</strong> Jenkins clones the latest code from GitHub repository.</li>
+            <li><strong>Stage 2 — Build:</strong> Maven compiles Java code and creates a JAR/WAR file.</li>
+            <li><strong>Stage 3 — Test:</strong> Maven runs all unit tests. If any test fails, pipeline stops here — bad code doesn't proceed.</li>
+            <li><strong>Stage 4 — Docker Build:</strong> Docker reads the Dockerfile and builds an image containing the app.</li>
+            <li><strong>Stage 5 — Push:</strong> Built image is pushed to Docker Hub registry for storage and sharing.</li>
+            <li><strong>Stage 6 — Deploy:</strong> Old container is stopped, new container is started from the fresh image.</li>
+            <li><strong>Benefits:</strong> Fully automated — no human intervention needed after git push. Fast feedback — developer knows in minutes if code is good. Consistent environments — Docker ensures same behavior everywhere.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q12 -->
+    <div class="qa-card" id="ia1q12">
+      <div class="qa-header" onclick="toggleQA(this)">
+        <span class="q-badge partC">Q12</span>
+        <span class="q-text">Explain Continuous Integration and Continuous Deployment using Jenkins with a neat diagram.</span>
+        <span class="q-marks">10 marks</span>
+        <span class="qa-chevron">▼</span>
+      </div>
+      <div class="qa-body">
+        <div class="qa-answer">
+          <h4>ANSWER — 10 MARKS</h4>
+          <p><strong>Continuous Integration (CI):</strong> The practice where developers frequently (multiple times a day) merge their code into a shared repository. Each merge automatically triggers a build and test process.</p>
+          <p><strong>Continuous Deployment (CD):</strong> Every code change that passes all tests is automatically deployed to production — without manual approval. Requires very high confidence in automated tests.</p>
+          <p><strong>CI/CD Diagram:</strong></p>
+          <div class="flowchart">
+            <div class="flow-col" style="gap:6px">
+              <div class="flow-chain" style="justify-content:center;flex-wrap:wrap;gap:6px">
+                <div class="flow-box ia1c">Developer 1 pushes code</div>
+                <div class="flow-box ia1c">Developer 2 pushes code</div>
+                <div class="flow-box ia1c">Developer 3 pushes code</div>
+              </div>
+              <div class="flow-down" style="text-align:center">↓ All go to same repository</div>
+              <div class="flow-chain" style="justify-content:center;gap:6px">
+                <div class="flow-box orange">GitHub Repository (Shared)</div>
+              </div>
+              <div class="flow-down" style="text-align:center">↓ Webhook → Jenkins triggered automatically</div>
+              <div class="flow-chain" style="justify-content:center;flex-wrap:wrap;gap:4px">
+                <div class="flow-box blue">Jenkins: Pull Code</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-box blue">Compile &amp; Build</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-box blue">Run Tests</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-box blue">Code Quality Check</div>
+              </div>
+              <div class="flow-down" style="text-align:center">↓ All checks pass? YES</div>
+              <div class="flow-chain" style="justify-content:center;flex-wrap:wrap;gap:4px">
+                <div class="flow-box ia2c">Build Docker Image</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-box ia2c">Push to Registry</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-box ia2c">Deploy to Staging</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-box ia2c">Deploy to PRODUCTION ✅</div>
+              </div>
+            </div>
+          </div>
+          <ul>
+            <li><strong>Why CI prevents "Integration Hell":</strong> If 5 developers work separately for 2 weeks and then merge all at once, conflicts are massive and painful. CI forces merges daily — conflicts are small and easy to fix.</li>
+            <li><strong>Jenkins Role in CI:</strong> Monitors the Git repository (via webhook or polling). When code arrives, it automatically runs the pipeline. Notifies developers of pass/fail via email or Slack.</li>
+            <li><strong>Difference — CI vs CD vs Continuous Delivery:</strong> CI = auto build+test on every push. Continuous Delivery = auto deploy to staging, human approves production push. Continuous Deployment = auto deploy all the way to production.</li>
+            <li><strong>Tools in a typical pipeline:</strong> Git (source) → Jenkins (automation) → Maven (build) → JUnit (test) → SonarQube (code quality) → Docker (packaging) → Kubernetes (deployment).</li>
+            <li><strong>Key Benefits:</strong> Early bug detection, no big scary release days, always-deployable codebase, fast feedback for developers, reduced deployment risk.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q13 -->
+    <div class="qa-card" id="ia1q13">
+      <div class="qa-header" onclick="toggleQA(this)">
+        <span class="q-badge partC">Q13</span>
+        <span class="q-text">Discuss all major Git commands (clone, add, commit, push, fetch, pull, checkout, reset, stash) with examples.</span>
+        <span class="q-marks">10 marks</span>
+        <span class="qa-chevron">▼</span>
+      </div>
+      <div class="qa-body">
+        <div class="qa-answer">
+          <h4>ANSWER — 10 MARKS</h4>
+          <div class="flowchart">
+            <div class="flow-chain" style="flex-wrap:wrap;gap:4px;justify-content:center;margin-bottom:8px">
+              <div class="flow-box">Remote Repo</div>
+              <div class="flow-arrow">←clone/pull/fetch→</div>
+              <div class="flow-box orange">Local Repo</div>
+              <div class="flow-arrow">←add/commit→</div>
+              <div class="flow-box blue">Staging Area</div>
+              <div class="flow-arrow">←edit→</div>
+              <div class="flow-box purple">Working Dir</div>
+            </div>
+          </div>
+          <table class="comparison-table">
+            <tr><th>Command</th><th>What it Does</th><th>Example</th></tr>
+            <tr><td>git clone</td><td>Copy a remote repo to your machine for the first time</td><td>git clone https://github.com/user/repo.git</td></tr>
+            <tr><td>git add</td><td>Stage changes — move from working dir to staging area</td><td>git add index.html (or git add . for all)</td></tr>
+            <tr><td>git commit</td><td>Save staged changes permanently with a message</td><td>git commit -m "Added login feature"</td></tr>
+            <tr><td>git push</td><td>Upload local commits to remote repository</td><td>git push origin main</td></tr>
+            <tr><td>git fetch</td><td>Download remote changes WITHOUT merging — just look</td><td>git fetch origin</td></tr>
+            <tr><td>git pull</td><td>Download + merge remote changes into current branch</td><td>git pull origin main</td></tr>
+            <tr><td>git checkout</td><td>Switch branch OR restore a file to last commit state</td><td>git checkout dev / git checkout file.txt</td></tr>
+            <tr><td>git reset</td><td>Undo commits. Three modes: soft, mixed, hard</td><td>git reset --soft HEAD~1</td></tr>
+            <tr><td>git stash</td><td>Temporarily save uncommitted work to switch tasks</td><td>git stash / git stash pop</td></tr>
+          </table>
+          <p><strong>Complete Daily Developer Workflow:</strong></p>
+          <div class="code-block"># Start of day — get latest code
+git pull origin main
+
+# Create a new branch for your feature
+git checkout -b feature/login-page
+
+# Make changes to files...
+# Check what changed
+git status
+
+# Stage your changes
+git add .
+
+# Commit your changes
+git commit -m "Add login page with form validation"
+
+# Urgent bug reported! Save current work
+git stash
+
+# Fix the bug on main
+git checkout main
+git checkout -b hotfix/null-pointer
+# ... fix the bug ...
+git add . && git commit -m "Fix null pointer in user service"
+git push origin hotfix/null-pointer
+
+# Go back to your feature
+git checkout feature/login-page
+git stash pop
+
+# Push your feature branch
+git push origin feature/login-page
+# Create Pull Request on GitHub for review</div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ===== IA-2 EXAM SECTION ===== -->
+  <section class="module-section ia2" id="ia2">
+    <div class="module-header">
+      <div class="module-number">IA2</div>
+      <div class="module-title-wrap">
+        <h2>Internal Assessment — 2</h2>
+        <p>MODULES 3, 4 & 5 · ALL QUESTIONS ANSWERED</p>
+      </div>
+    </div>
+
+    <div class="ia-banner">
+      <div class="ia-banner-icon">📋</div>
+      <div class="ia-banner-text">
+        <h3>IA-2 EXAM PAPER</h3>
+        <p>COVERS MODULE 3 (Jenkins) + MODULE 4 (Maven) + MODULE 5 (Docker) · CLICK TO EXPAND ANSWERS</p>
+      </div>
+    </div>
+
+    <div class="marks-grid">
+      <div class="marks-box"><span class="marks-num">10</span><span class="marks-label">PART A MARKS</span></div>
+      <div class="marks-box"><span class="marks-num">20</span><span class="marks-label">PART B MARKS</span></div>
+      <div class="marks-box"><span class="marks-num">20</span><span class="marks-label">PART C MARKS</span></div>
+    </div>
+
+    <!-- PART A -->
+    <div class="part-divider">
+      <span class="part-label">PART A</span>
+      <div class="part-line"></div>
+      <span class="part-info">5 × 2 = 10 MARKS · ANSWER ALL</span>
+    </div>
+
+    <!-- Q1 -->
+    <div class="qa-card" id="ia2q1">
+      <div class="qa-header" onclick="toggleQA(this)">
+        <span class="q-badge partA">Q1</span>
+        <span class="q-text">What is Jenkins? List its key features and explain the role of Jenkins in Continuous Integration.</span>
+        <span class="q-marks">2 marks</span>
+        <span class="qa-chevron">▼</span>
+      </div>
+      <div class="qa-body">
+        <div class="qa-answer">
+          <h4>ANSWER — 2 MARKS</h4>
+          <p><strong>Jenkins</strong> is a free, open-source automation server written in Java. It automates the software build, test, and deployment process — the backbone of any CI/CD pipeline.</p>
+          <ul>
+            <li><strong>Key Features:</strong> Open-source and free. 1800+ plugins for integration with any tool. Distributed builds (Master-Slave architecture). Easy setup via web UI. Pipeline-as-code using Jenkinsfile. Supports all major OS.</li>
+            <li><strong>Role in CI:</strong> Jenkins watches the Git repository. When a developer pushes code, Jenkins automatically pulls the code, compiles it, runs tests, and reports results. This gives instant feedback — developers know within minutes if their code broke something.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="qa-card" id="ia2q2">
+      <div class="qa-header" onclick="toggleQA(this)">
+        <span class="q-badge partA">Q2</span>
+        <span class="q-text">Differentiate between POLL SCM and Build Periodically scheduling strategies in Jenkins.</span>
+        <span class="q-marks">2 marks</span>
+        <span class="qa-chevron">▼</span>
+      </div>
+      <div class="qa-body">
+        <div class="qa-answer">
+          <h4>ANSWER — 2 MARKS</h4>
+          <table class="comparison-table">
+            <tr><th>Poll SCM</th><th>Build Periodically</th></tr>
+            <tr><td>Jenkins checks the repository for new commits at regular intervals</td><td>Jenkins runs the build at scheduled times, regardless of code changes</td></tr>
+            <tr><td>Build triggers ONLY if new code is found</td><td>Build triggers on schedule EVEN if nothing changed</td></tr>
+            <tr><td>Like checking your email every 5 minutes to see if new mail arrived</td><td>Like waking up at 7 AM every morning no matter what</td></tr>
+            <tr><td>Example: H/5 * * * * (check every 5 min)</td><td>Example: 0 2 * * * (build at 2 AM daily)</td></tr>
+          </table>
+          <div class="tip-box">Best practice: Use Webhooks instead of both — GitHub notifies Jenkins instantly when code is pushed. No polling needed.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="qa-card" id="ia2q3">
+      <div class="qa-header" onclick="toggleQA(this)">
+        <span class="q-badge partA">Q3</span>
+        <span class="q-text">What is the purpose of Maven POM (pom.xml)? List its key elements.</span>
+        <span class="q-marks">2 marks</span>
+        <span class="qa-chevron">▼</span>
+      </div>
+      <div class="qa-body">
+        <div class="qa-answer">
+          <h4>ANSWER — 2 MARKS</h4>
+          <p><strong>Purpose:</strong> pom.xml (Project Object Model) is the heart of a Maven project. It tells Maven everything about the project — what to build, how to build it, what dependencies to download, and where to deploy it.</p>
+          <ul>
+            <li><strong>groupId:</strong> Organization identifier (e.g., com.mycompany) — like a package/namespace</li>
+            <li><strong>artifactId:</strong> Project name (e.g., my-webapp) — the unique name of this module</li>
+            <li><strong>version:</strong> Project version (e.g., 1.0.0 or 1.0-SNAPSHOT)</li>
+            <li><strong>dependencies:</strong> External libraries your project needs — Maven downloads them automatically</li>
+            <li><strong>plugins:</strong> Build tools that perform actions (compile, test, package)</li>
+            <li><strong>build:</strong> Custom build configuration settings</li>
+            <li><strong>packaging:</strong> Output type — jar (library) or war (web app)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="qa-card" id="ia2q4">
+      <div class="qa-header" onclick="toggleQA(this)">
+        <span class="q-badge partA">Q4</span>
+        <span class="q-text">Explain the role of Docker Engine in container management.</span>
+        <span class="q-marks">2 marks</span>
+        <span class="qa-chevron">▼</span>
+      </div>
+      <div class="qa-body">
+        <div class="qa-answer">
+          <h4>ANSWER — 2 MARKS</h4>
+          <p><strong>Docker Engine</strong> is the core runtime that makes Docker work. It is a client-server application that manages the entire container lifecycle.</p>
+          <ul>
+            <li><strong>Docker Daemon (dockerd):</strong> Background service that listens for Docker API requests. Actually creates, runs, stops, and deletes containers and images.</li>
+            <li><strong>Docker CLI (docker):</strong> Command-line client that users type commands into (docker run, docker build). Sends commands to daemon via REST API.</li>
+            <li><strong>REST API:</strong> Interface that connects CLI to daemon — allows third-party tools and scripts to control Docker programmatically.</li>
+            <li><strong>What it manages:</strong> Images (build, store, distribute), Containers (run, stop, monitor), Networks (connect containers), Volumes (persistent data storage).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="qa-card" id="ia2q5">
+      <div class="qa-header" onclick="toggleQA(this)">
+        <span class="q-badge partA">Q5</span>
+        <span class="q-text">What are Maven Dependencies? How are they declared in pom.xml?</span>
+        <span class="q-marks">2 marks</span>
+        <span class="qa-chevron">▼</span>
+      </div>
+      <div class="qa-body">
+        <div class="qa-answer">
+          <h4>ANSWER — 2 MARKS</h4>
+          <p><strong>Maven Dependencies</strong> are external libraries (JAR files) that your project needs to compile and run. Instead of manually downloading JARs, you just declare them in pom.xml and Maven downloads them automatically from Maven Central.</p>
+          <div class="code-block">&lt;dependencies&gt;
+  &lt;dependency&gt;
+    &lt;groupId&gt;junit&lt;/groupId&gt;
+    &lt;artifactId&gt;junit&lt;/artifactId&gt;
+    &lt;version&gt;4.13.2&lt;/version&gt;
+    &lt;scope&gt;test&lt;/scope&gt;
+  &lt;/dependency&gt;
+
+  &lt;dependency&gt;
+    &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-core&lt;/artifactId&gt;
+    &lt;version&gt;5.3.0&lt;/version&gt;
+  &lt;/dependency&gt;
+&lt;/dependencies&gt;</div>
+          <ul>
+            <li><strong>scope:</strong> compile (default, always), test (only for tests), provided (runtime not packaged), runtime (run but not compile)</li>
+            <li><strong>Transitive dependencies:</strong> If Spring needs library X, Maven automatically downloads X too — you don't declare it.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- PART B -->
+    <div class="part-divider">
+      <span class="part-label">PART B</span>
+      <div class="part-line"></div>
+      <span class="part-info">4 × 5 = 20 MARKS · ANSWER ANY 4 OF 5</span>
+    </div>
+
+    <!-- Q6 -->
+    <div class="qa-card" id="ia2q6">
+      <div class="qa-header" onclick="toggleQA(this)">
+        <span class="q-badge partB">Q6</span>
+        <span class="q-text">Explain the Jenkins Build Pipeline with Parent, Child, and Sequential Builds. Illustrate with a diagram.</span>
+        <span class="q-marks">5 marks</span>
+        <span class="qa-chevron">▼</span>
+      </div>
+      <div class="qa-body">
+        <div class="qa-answer">
+          <h4>ANSWER — 5 MARKS</h4>
+          <p>A <strong>Jenkins Build Pipeline</strong> is a chain of connected jobs where the output of one job triggers the next. This automates the full journey from code to production.</p>
+          <p><strong>Parent-Child (Upstream-Downstream) Build:</strong></p>
+          <div class="flowchart">
+            <div class="flow-col" style="gap:4px">
+              <div class="flow-chain" style="justify-content:center">
+                <div class="flow-box ia2c" style="text-align:center">PARENT JOB<br><small>Compile-Build</small></div>
+              </div>
+              <div class="flow-down" style="text-align:center">↓ triggers on success</div>
+              <div class="flow-chain" style="justify-content:center;gap:8px">
+                <div class="flow-box orange" style="text-align:center">CHILD 1<br><small>Unit Tests</small></div>
+                <div class="flow-box orange" style="text-align:center">CHILD 2<br><small>Integration Tests</small></div>
+              </div>
+              <div class="flow-down" style="text-align:center">↓ both pass → triggers</div>
+              <div class="flow-chain" style="justify-content:center">
+                <div class="flow-box blue" style="text-align:center">CHILD 3<br><small>Deploy to Staging</small></div>
+              </div>
+              <div class="flow-down" style="text-align:center">↓ triggers</div>
+              <div class="flow-chain" style="justify-content:center">
+                <div class="flow-box ia2c" style="text-align:center">CHILD 4<br><small>Deploy to Production</small></div>
+              </div>
+            </div>
+          </div>
+          <ul>
+            <li><strong>Parent Job:</strong> The upstream (first) job. Triggers downstream (child) jobs when it completes successfully.</li>
+            <li><strong>Child Jobs:</strong> Downstream jobs triggered by the parent. Can be set up in "Post-build Actions" → "Build other projects."</li>
+            <li><strong>Sequential Builds:</strong> Each stage runs in order. Next stage starts only after previous passes. If any stage fails, the entire pipeline stops.</li>
+            <li><strong>Parallel Builds:</strong> Child 1 (Unit Tests) and Child 2 (Integration Tests) can run simultaneously to save time.</li>
+            <li><strong>Jenkins Pipeline Plugin:</strong> Provides a visual "Build Pipeline View" — color-coded boxes showing which jobs passed (green), failed (red), or are running (blue).</li>
+            <li><strong>Jenkinsfile example:</strong> stages { stage('Build'){...} stage('Test'){...} stage('Deploy'){...} } — each stage runs sequentially by default.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="qa-card" id="ia2q7">
+      <div class="qa-header" onclick="toggleQA(this)">
+        <span class="q-badge partB">Q7</span>
+        <span class="q-text">Explain with examples the difference between Maven Local Repository and Maven Global Repository.</span>
+        <span class="q-marks">5 marks</span>
+        <span class="qa-chevron">▼</span>
+      </div>
+      <div class="qa-body">
+        <div class="qa-answer">
+          <h4>ANSWER — 5 MARKS</h4>
+          <div class="flowchart">
+            <div class="flow-chain" style="justify-content:center;flex-wrap:wrap;gap:8px;margin-bottom:8px">
+              <div class="flow-col">
+                <div class="flow-box ia2c">Maven Build Starts</div>
+                <div class="flow-down">↓ Look for dependency</div>
+                <div class="flow-box ia2c">① Check Local (.m2)</div>
+                <div class="flow-down">↓ Not found?</div>
+                <div class="flow-box orange">② Check Corporate Repo (Nexus)</div>
+                <div class="flow-down">↓ Not found?</div>
+                <div class="flow-box blue">③ Download from Maven Central</div>
+                <div class="flow-down">↓ Save to local .m2 cache</div>
+                <div class="flow-box ia2c">Build continues</div>
+              </div>
+            </div>
+          </div>
+          <ul>
+            <li><strong>Local Repository (~/.m2/repository):</strong> A folder on YOUR machine. Acts as a cache. When Maven downloads a dependency, it saves it here. Next time you build, Maven finds it locally — no internet needed. Faster builds. Example path: C:\Users\Username\.m2\repository\junit\junit\4.13\</li>
+            <li><strong>Global/Central Repository (Maven Central):</strong> A massive public server on the internet at https://repo.maven.apache.org/maven2. Contains millions of open-source Java libraries. Maven downloads from here when local cache doesn't have the dependency.</li>
+            <li><strong>Corporate/Private Repository (Nexus/Artifactory):</strong> A company's own private server. Stores internal libraries that can't go on public Maven Central. Also acts as a mirror/proxy of Maven Central — useful in environments without internet access.</li>
+            <li><strong>Lookup order:</strong> Always Local first → Corporate (if configured) → Maven Central. This is why the first build is slow (downloads everything) but subsequent builds are fast (uses local cache).</li>
+            <li><strong>mvn install</strong> puts your own project's built artifact into your local .m2 — other local projects can then use it as a dependency.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="qa-card" id="ia2q8">
+      <div class="qa-header" onclick="toggleQA(this)">
+        <span class="q-badge partB">Q8</span>
+        <span class="q-text">Demonstrate the Maven Build Life Cycle phases with a suitable example.</span>
+        <span class="q-marks">5 marks</span>
+        <span class="qa-chevron">▼</span>
+      </div>
+      <div class="qa-body">
+        <div class="qa-answer">
+          <h4>ANSWER — 5 MARKS</h4>
+          <p>Maven has a <strong>default build lifecycle</strong> with fixed phases that always run in order. When you run `mvn package`, Maven runs ALL phases from validate to package automatically.</p>
+          <div class="flowchart">
+            <div class="flow-chain" style="flex-wrap:wrap;gap:4px;justify-content:center">
+              <div class="flow-col"><div class="flow-box">① validate</div></div>
+              <div class="flow-arrow">→</div>
+              <div class="flow-col"><div class="flow-box orange">② compile</div></div>
+              <div class="flow-arrow">→</div>
+              <div class="flow-col"><div class="flow-box blue">③ test</div></div>
+              <div class="flow-arrow">→</div>
+              <div class="flow-col"><div class="flow-box purple">④ package</div></div>
+              <div class="flow-arrow">→</div>
+              <div class="flow-col"><div class="flow-box ia1c">⑤ verify</div></div>
+              <div class="flow-arrow">→</div>
+              <div class="flow-col"><div class="flow-box ia2c">⑥ install</div></div>
+              <div class="flow-arrow">→</div>
+              <div class="flow-col"><div class="flow-box" style="color:var(--accent2);border-color:var(--accent2)">⑦ deploy</div></div>
+            </div>
+          </div>
+          <table class="comparison-table">
+            <tr><th>Phase</th><th>What Happens</th><th>Command to Run up to this phase</th></tr>
+            <tr><td>validate</td><td>Checks pom.xml is valid and all info is present</td><td>mvn validate</td></tr>
+            <tr><td>compile</td><td>Compiles src/main/java → target/classes/</td><td>mvn compile</td></tr>
+            <tr><td>test</td><td>Runs JUnit tests in src/test/java. Build FAILS if any test fails</td><td>mvn test</td></tr>
+            <tr><td>package</td><td>Creates JAR or WAR file in target/ folder</td><td>mvn package</td></tr>
+            <tr><td>verify</td><td>Runs integration tests to verify package quality</td><td>mvn verify</td></tr>
+            <tr><td>install</td><td>Copies JAR to local ~/.m2 repo for other projects to use</td><td>mvn install</td></tr>
+            <tr><td>deploy</td><td>Uploads artifact to remote Nexus/Artifactory for team</td><td>mvn deploy</td></tr>
+          </table>
+          <p><strong>Example:</strong> Running `mvn package` on a Spring Boot project: validates pom.xml → compiles Java files → runs 23 unit tests → packages everything into myapp-1.0.jar in the target/ folder.</p>
+          <div class="tip-box">mvn clean package — "clean" deletes the target/ folder first, ensuring a fresh build. Always use clean in CI pipelines.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q9 -->
+    <div class="qa-card" id="ia2q9">
+      <div class="qa-header" onclick="toggleQA(this)">
+        <span class="q-badge partB">Q9</span>
+        <span class="q-text">Explain Docker Compose and Docker Swarm with their use cases and differences.</span>
+        <span class="q-marks">5 marks</span>
+        <span class="qa-chevron">▼</span>
+      </div>
+      <div class="qa-body">
+        <div class="qa-answer">
+          <h4>ANSWER — 5 MARKS</h4>
+          <p><strong>Docker Compose</strong> — Multi-Container Apps on ONE Machine</p>
+          <p>Docker Compose lets you define multiple containers in a single docker-compose.yml file and start them all with one command. Perfect for local development.</p>
+          <div class="code-block">version: '3'
+services:
+  webapp:
+    image: myapp:latest
+    ports: ["8080:8080"]
+    depends_on: [database, cache]
+  database:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+  cache:
+    image: redis:alpine</div>
+          <p><strong>Docker Swarm</strong> — Deploy Containers Across MULTIPLE Machines</p>
+          <p>Docker Swarm clusters multiple Docker hosts into one. You deploy a service and Swarm spreads it across machines, handles failures, and scales automatically.</p>
+          <div class="flowchart">
+            <div class="flow-chain" style="justify-content:center;flex-wrap:wrap;gap:6px">
+              <div class="flow-box ia2c">Manager Node (Controls Swarm)</div>
+              <div class="flow-arrow">distributes to</div>
+              <div class="flow-col">
+                <div class="flow-box orange">Worker 1 (2 containers)</div>
+                <div style="height:4px"></div>
+                <div class="flow-box orange">Worker 2 (2 containers)</div>
+                <div style="height:4px"></div>
+                <div class="flow-box orange">Worker 3 (1 container)</div>
+              </div>
+            </div>
+          </div>
+          <table class="comparison-table">
+            <tr><th>Feature</th><th>Docker Compose</th><th>Docker Swarm</th></tr>
+            <tr><td>Scope</td><td>Single machine (local dev)</td><td>Multiple machines (production cluster)</td></tr>
+            <tr><td>Scaling</td><td>Manual (change replica count)</td><td>Automatic self-healing, auto-scaling</td></tr>
+            <tr><td>Use Case</td><td>Local development, testing</td><td>Production deployment at scale</td></tr>
+            <tr><td>Fault Tolerance</td><td>No — if machine dies, app dies</td><td>Yes — containers restart on healthy nodes</td></tr>
+            <tr><td>Command</td><td>docker-compose up</td><td>docker swarm init, docker service create</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q10 -->
+    <div class="qa-card" id="ia2q10">
+      <div class="qa-header" onclick="toggleQA(this)">
+        <span class="q-badge partB">Q10</span>
+        <span class="q-text">Describe how to Secure Jenkins covering Authentication, Authorization, Confidentiality, and Creating Users.</span>
+        <span class="q-marks">5 marks</span>
+        <span class="qa-chevron">▼</span>
+      </div>
+      <div class="qa-body">
+        <div class="qa-answer">
+          <h4>ANSWER — 5 MARKS</h4>
+          <div class="flowchart">
+            <div class="flow-chain" style="justify-content:center;flex-wrap:wrap;gap:6px">
+              <div class="flow-box ia2c">User visits Jenkins</div>
+              <div class="flow-arrow">→</div>
+              <div class="flow-box orange">Authentication (Who are you?)</div>
+              <div class="flow-arrow">→</div>
+              <div class="flow-box blue">Authorization (What can you do?)</div>
+              <div class="flow-arrow">→</div>
+              <div class="flow-box purple">Confidentiality (Data is encrypted)</div>
+            </div>
+          </div>
+          <ul>
+            <li><strong>Authentication (Who are you?):</strong> Verifies identity before allowing access. Options: Jenkins own user database (built-in, good for small teams), LDAP integration (connect to company Active Directory — employees log in with work credentials), GitHub/Google OAuth (log in with GitHub account), SSO (Single Sign-On for enterprise). Enable at: Manage Jenkins → Security → Security Realm.</li>
+            <li><strong>Authorization (What can you do?):</strong> Controls what authenticated users are allowed to do. Best option: "Matrix-based security" — create a table where rows = users/groups, columns = permissions (Read, Build, Configure, Admin). Example: Developer → can build and view. QA → can view only. Admin → full access. Use "Role-based Authorization Strategy" plugin for group-based roles.</li>
+            <li><strong>Confidentiality (Data is encrypted):</strong> Use HTTPS — install SSL certificate so all traffic between browser and Jenkins is encrypted. Never use HTTP in production. Store secrets (passwords, API keys, SSH keys) in Jenkins Credentials Store — never in Jenkinsfiles as plain text. Use environment variables to inject secrets: `withCredentials([usernamePassword(...)])`</li>
+            <li><strong>Creating Users:</strong> Manage Jenkins → Manage Users → Create User. Fill name, password, full name, email. Assign roles/permissions after creation. Disable anonymous access — Manage Jenkins → Security → uncheck "Allow anonymous read access."</li>
+            <li><strong>Best Practices:</strong> Limit admin accounts. Audit who has what access. Use separate accounts per team member (not shared accounts). Enable Jenkins Audit Log plugin to track all actions.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- PART C -->
+    <div class="part-divider">
+      <span class="part-label">PART C</span>
+      <div class="part-line"></div>
+      <span class="part-info">2 × 10 = 20 MARKS · ANSWER ANY 2 OF 3</span>
+    </div>
+
+    <!-- Q11 -->
+    <div class="qa-card" id="ia2q11">
+      <div class="qa-header" onclick="toggleQA(this)">
+        <span class="q-badge partC">Q11</span>
+        <span class="q-text">Configure a Jenkins Master-Slave Node setup and explain Workspace Management with a practical scenario. Also describe the different types of Jenkins Jobs.</span>
+        <span class="q-marks">10 marks</span>
+        <span class="qa-chevron">▼</span>
+      </div>
+      <div class="qa-body">
+        <div class="qa-answer">
+          <h4>ANSWER — 10 MARKS</h4>
+          <p><strong>Part 1 — Jenkins Master-Slave (Controller-Agent) Architecture</strong></p>
+          <div class="flowchart">
+            <div class="flow-col" style="gap:6px;align-items:center">
+              <div class="flow-box ia2c" style="padding:12px 20px;text-align:center">JENKINS MASTER (Controller)<br><small>Manages jobs, schedules builds, stores results</small></div>
+              <div class="flow-down">↓ assigns work via SSH or JNLP</div>
+              <div class="flow-chain" style="gap:8px;flex-wrap:wrap;justify-content:center">
+                <div class="flow-box orange" style="text-align:center">AGENT 1<br><small>Linux Machine<br>label: "linux"</small></div>
+                <div class="flow-box orange" style="text-align:center">AGENT 2<br><small>Windows Machine<br>label: "windows"</small></div>
+                <div class="flow-box orange" style="text-align:center">AGENT 3<br><small>Mac Machine<br>label: "macos"</small></div>
+                <div class="flow-box orange" style="text-align:center">AGENT 4<br><small>Docker Container<br>label: "docker"</small></div>
+              </div>
+            </div>
+          </div>
+          <ul>
+            <li><strong>Setup Steps:</strong> 1) Go to Manage Jenkins → Manage Nodes → New Node. 2) Give node a name and select "Permanent Agent." 3) Set remote root directory (where Jenkins stores workspace on agent). 4) Add labels (e.g., "linux-build"). 5) Choose connection method (SSH preferred for Linux). 6) Enter agent machine's IP, SSH credentials. 7) Save and launch.</li>
+            <li><strong>Why use agents:</strong> Offload builds from master. Run builds on OS-specific agents (iOS app needs Mac). Run multiple builds in parallel. Scale by adding more agents.</li>
+            <li><strong>In Jenkinsfile:</strong> `agent { label 'linux' }` — runs only on agents tagged "linux."</li>
+          </ul>
+          <p><strong>Part 2 — Workspace Management</strong></p>
+          <ul>
+            <li>Jenkins creates a workspace folder on the agent for each job — this is where code is checked out and builds happen.</li>
+            <li>Default location: JENKINS_HOME/workspace/[job-name] on the agent machine.</li>
+            <li>Workspace Cleanup Plugin: Clean workspace before or after each build to avoid stale files from previous builds affecting current build.</li>
+            <li>Practical Scenario: Job "build-webapp" runs on Agent 1. Jenkins creates /workspace/build-webapp/ on Agent 1, clones code there, runs Maven, stores JAR — all in this workspace.</li>
+          </ul>
+          <p><strong>Part 3 — Types of Jenkins Jobs</strong></p>
+          <table class="comparison-table">
+            <tr><th>Job Type</th><th>Description</th><th>Best For</th></tr>
+            <tr><td>Freestyle Project</td><td>Simple UI-based configuration. Add shell commands, set triggers, define build steps via form fields</td><td>Beginners, simple scripts</td></tr>
+            <tr><td>Pipeline</td><td>Pipeline as code using Jenkinsfile. Full control with stages, parallel execution, error handling</td><td>Production CI/CD pipelines</td></tr>
+            <tr><td>Maven Project</td><td>Understands Maven lifecycle. Auto-parses pom.xml. Simpler Maven-specific setup</td><td>Java/Maven projects</td></tr>
+            <tr><td>Multibranch Pipeline</td><td>Auto-creates a pipeline for each branch in repository. Jenkinsfile lives in each branch</td><td>Feature branch workflows</td></tr>
+            <tr><td>Matrix/Multi-Config</td><td>Runs same build with different config combinations (OS, JDK version, etc.)</td><td>Cross-platform testing</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q12 -->
+    <div class="qa-card" id="ia2q12">
+      <div class="qa-header" onclick="toggleQA(this)">
+        <span class="q-badge partC">Q12</span>
+        <span class="q-text">Explain the Dockerfile and its commands in detail. Write a sample Dockerfile to containerize a Java application and describe Docker Hub and Docker Trusted Registry.</span>
+        <span class="q-marks">10 marks</span>
+        <span class="qa-chevron">▼</span>
+      </div>
+      <div class="qa-body">
+        <div class="qa-answer">
+          <h4>ANSWER — 10 MARKS</h4>
+          <p><strong>Dockerfile</strong> is a text file containing step-by-step instructions to build a Docker image. Each instruction creates a new layer in the image.</p>
+          <p><strong>Dockerfile Instructions Explained:</strong></p>
+          <table class="comparison-table">
+            <tr><th>Instruction</th><th>Purpose</th><th>Example</th></tr>
+            <tr><td>FROM</td><td>Sets the base image (starting point). MUST be first instruction</td><td>FROM openjdk:17-slim</td></tr>
+            <tr><td>MAINTAINER/LABEL</td><td>Metadata about the image — author, version info</td><td>LABEL maintainer="dev@myapp.com"</td></tr>
+            <tr><td>RUN</td><td>Execute shell commands DURING image build. Creates a new layer</td><td>RUN apt-get update && apt-get install -y curl</td></tr>
+            <tr><td>COPY</td><td>Copy files from host machine into the image</td><td>COPY target/myapp.jar /app/myapp.jar</td></tr>
+            <tr><td>ADD</td><td>Like COPY but also extracts archives and supports URLs</td><td>ADD myapp.tar.gz /app/</td></tr>
+            <tr><td>WORKDIR</td><td>Set working directory for subsequent instructions</td><td>WORKDIR /app</td></tr>
+            <tr><td>ENV</td><td>Set environment variables in the container</td><td>ENV JAVA_OPTS="-Xmx512m -Xms256m"</td></tr>
+            <tr><td>EXPOSE</td><td>Documents port the app listens on (informational only)</td><td>EXPOSE 8080</td></tr>
+            <tr><td>VOLUME</td><td>Create mount point for persistent data storage</td><td>VOLUME ["/app/logs"]</td></tr>
+            <tr><td>CMD</td><td>Default command to run when container starts. Can be overridden</td><td>CMD ["java", "-jar", "myapp.jar"]</td></tr>
+            <tr><td>ENTRYPOINT</td><td>Main command. Cannot be easily overridden. Use with CMD for args</td><td>ENTRYPOINT ["java", "-jar", "/app/myapp.jar"]</td></tr>
+          </table>
+          <p><strong>Sample Dockerfile — Java Application:</strong></p>
+          <div class="code-block"># Stage 1: Build the application
+FROM maven:3.9-openjdk-17 AS builder
+WORKDIR /build
+COPY pom.xml .
+RUN mvn dependency:resolve
+COPY src ./src
+RUN mvn clean package -DskipTests
+
+# Stage 2: Create the final lightweight image
+FROM openjdk:17-slim
+LABEL maintainer="team@mycompany.com"
+LABEL version="1.0"
+
+WORKDIR /app
+
+# Create non-root user for security
+RUN groupadd -r appuser && useradd -r -g appuser appuser
+
+# Copy built JAR from builder stage
+COPY --from=builder /build/target/myapp-1.0.jar /app/myapp.jar
+
+# Set environment variables
+ENV JAVA_OPTS="-Xmx512m -Xms256m"
+ENV SERVER_PORT=8080
+
+# Volume for logs
+VOLUME ["/app/logs"]
+
+# Expose the application port
+EXPOSE 8080
+
+# Run as non-root user
+USER appuser
+
+# Start the application
+CMD ["sh", "-c", "java $JAVA_OPTS -jar /app/myapp.jar"]</div>
+          <div class="code-block"># Build the image
+docker build -t mycompany/myapp:1.0 .
+
+# Run the container
+docker run -d -p 8080:8080 --name myapp mycompany/myapp:1.0</div>
+          <p><strong>Docker Hub:</strong></p>
+          <ul>
+            <li>Public cloud registry at hub.docker.com. Free for public images, paid for private.</li>
+            <li>Contains official images (nginx, mysql, python) maintained by vendors.</li>
+            <li>Push: `docker login && docker push mycompany/myapp:1.0`</li>
+            <li>Pull: `docker pull mycompany/myapp:1.0`</li>
+          </ul>
+          <p><strong>Docker Trusted Registry (DTR):</strong></p>
+          <ul>
+            <li>Enterprise private registry hosted INSIDE your company's network — no images leave your firewall.</li>
+            <li>Features: Role-Based Access Control (who can push/pull which images), Image Signing (cryptographic proof image wasn't tampered with), Vulnerability Scanning (automatically scans images for known CVEs/security holes), Full Audit Logs (who pushed what image when).</li>
+            <li>Replaces Docker Hub for organizations with strict security/compliance requirements (banking, healthcare, government).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q13 -->
+    <div class="qa-card" id="ia2q13">
+      <div class="qa-header" onclick="toggleQA(this)">
+        <span class="q-badge partC">Q13</span>
+        <span class="q-text">Describe the complete Maven Build process including Installation, POM Builds, Group ID, Artifact ID, Snapshot, and Plugins with a worked example.</span>
+        <span class="q-marks">10 marks</span>
+        <span class="qa-chevron">▼</span>
+      </div>
+      <div class="qa-body">
+        <div class="qa-answer">
+          <h4>ANSWER — 10 MARKS</h4>
+          <p><strong>Step 1 — Maven Installation</strong></p>
+          <ul>
+            <li>Download Apache Maven binary from maven.apache.org</li>
+            <li>Extract to a folder (e.g., C:\maven or /opt/maven)</li>
+            <li>Set MAVEN_HOME = path to maven folder</li>
+            <li>Add MAVEN_HOME/bin to system PATH variable</li>
+            <li>Verify: `mvn --version` → shows Maven 3.x.x and Java version</li>
+          </ul>
+          <p><strong>Step 2 — Understanding pom.xml (Complete Example)</strong></p>
+          <div class="code-block">&lt;project xmlns="http://maven.apache.org/POM/4.0.0"&gt;
+  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+
+  &lt;!-- PROJECT COORDINATES (unique identity) --&gt;
+  &lt;groupId&gt;com.mycompany&lt;/groupId&gt;     &lt;!-- Organization --&gt;
+  &lt;artifactId&gt;student-portal&lt;/artifactId&gt; &lt;!-- Project Name --&gt;
+  &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;        &lt;!-- Version --&gt;
+  &lt;packaging&gt;war&lt;/packaging&gt;             &lt;!-- Output: WAR for web app --&gt;
+
+  &lt;name&gt;Student Portal Application&lt;/name&gt;
+
+  &lt;properties&gt;
+    &lt;maven.compiler.source&gt;17&lt;/maven.compiler.source&gt;
+    &lt;maven.compiler.target&gt;17&lt;/maven.compiler.target&gt;
+  &lt;/properties&gt;
+
+  &lt;dependencies&gt;
+    &lt;!-- Testing dependency --&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;junit&lt;/groupId&gt;
+      &lt;artifactId&gt;junit&lt;/artifactId&gt;
+      &lt;version&gt;4.13.2&lt;/version&gt;
+      &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;
+    &lt;!-- Spring Web dependency --&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-webmvc&lt;/artifactId&gt;
+      &lt;version&gt;5.3.0&lt;/version&gt;
+    &lt;/dependency&gt;
+  &lt;/dependencies&gt;
+
+  &lt;build&gt;
+    &lt;plugins&gt;
+      &lt;plugin&gt;
+        &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+        &lt;artifactId&gt;maven-war-plugin&lt;/artifactId&gt;
+        &lt;version&gt;3.3.1&lt;/version&gt;
+      &lt;/plugin&gt;
+    &lt;/plugins&gt;
+  &lt;/build&gt;
+&lt;/project&gt;</div>
+          <p><strong>Step 3 — Key Concepts Explained</strong></p>
+          <ul>
+            <li><strong>groupId (com.mycompany):</strong> Identifies the organization. Always in reverse domain name format. All projects by the same org share the same groupId. Like a Java package name for the whole company.</li>
+            <li><strong>artifactId (student-portal):</strong> Name of the specific project/module. Unique within the groupId. The built JAR/WAR will be named after this — student-portal-1.0.war</li>
+            <li><strong>version 1.0-SNAPSHOT vs 1.0.0:</strong> SNAPSHOT = currently being developed. Maven re-downloads SNAPSHOT dependencies each build (may have changed). RELEASE (1.0.0) = finalized, never changes. When development is done, remove SNAPSHOT from version → it becomes a release.</li>
+            <li><strong>Plugins:</strong> Maven plugins perform all build actions. maven-compiler-plugin compiles Java. maven-surefire-plugin runs tests. maven-war-plugin creates WAR file. Configured inside &lt;build&gt;&lt;plugins&gt; section of pom.xml.</li>
+          </ul>
+          <p><strong>Step 4 — Complete Build Lifecycle Run</strong></p>
+          <div class="flowchart">
+            <div class="flow-chain" style="flex-wrap:wrap;gap:4px;justify-content:center">
+              <div class="flow-box">$ mvn clean install</div>
+              <div class="flow-arrow">runs</div>
+              <div class="flow-box orange">clean → deletes target/</div>
+              <div class="flow-arrow">then</div>
+              <div class="flow-box blue">validate → compile → test → package → verify → install</div>
+            </div>
+          </div>
+          <ul>
+            <li>validate: pom.xml checked ✓</li>
+            <li>compile: StudentController.java → StudentController.class in target/classes/ ✓</li>
+            <li>test: StudentServiceTest.java runs 12 tests — all pass ✓</li>
+            <li>package: target/student-portal-1.0-SNAPSHOT.war created ✓</li>
+            <li>install: WAR copied to ~/.m2/repository/com/mycompany/student-portal/1.0-SNAPSHOT/ ✓</li>
+          </ul>
+          <div class="tip-box">mvn clean install -DskipTests — skip tests during build when you just want the artifact fast. Never do this in CI/CD pipelines!</div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
 </div>
 
-<footer>GOOD LUCK ON YOUR EXAM · YOU GOT THIS · DEVOPS STUDY GUIDE 2024</footer>
+<footer>GOOD LUCK ON YOUR EXAM · YOU GOT THIS · DEVOPS COMPLETE STUDY GUIDE + IA-1 + IA-2</footer>
 
 <script>
   function toggle(header) {
+    const card = header.parentElement;
+    card.classList.toggle('open');
+  }
+
+  function toggleQA(header) {
     const card = header.parentElement;
     card.classList.toggle('open');
   }
@@ -1070,22 +2628,22 @@
     });
   }
 
-  function scrollTo(id) {
+  function scrollToSec(id) {
     document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
     document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
     event.target.classList.add('active');
   }
 
-  // Update active nav on scroll
   const sections = document.querySelectorAll('.module-section');
   const navBtns = document.querySelectorAll('.nav-btn');
+  const ids = ['m1','m2','m3','m4','m5','ia1','ia2'];
   window.addEventListener('scroll', () => {
     let current = '';
     sections.forEach(s => {
       if (window.scrollY >= s.offsetTop - 200) current = s.id;
     });
     navBtns.forEach((btn, i) => {
-      btn.classList.toggle('active', i === ['m1','m2','m3','m4','m5'].indexOf(current));
+      btn.classList.toggle('active', i === ids.indexOf(current));
     });
   });
 </script>
